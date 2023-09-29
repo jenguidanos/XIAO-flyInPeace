@@ -24,28 +24,24 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include "config.h"
-#include "pinout.h"
-#include "buttons/button_handler.h"
-
 #if defined(ARDUINO) && ARDUINO >= 100
   #include "Arduino.h"
 #else
   #include "WProgram.h"
 #endif
 
+#include "config.h"
+#include <commons.h>
 #include <barometer/barometer.h>
-#include <commons/commons.h>
+#include <variometer/variometer.h>
 
 //---[ Globals: ]---------------------------------------------------------------
 
-CButtonHandler goButton0(BUTTON_PIN0, DEFAULT_LONGPRESS_LEN);
-CButtonHandler goButton1(BUTTON_PIN1, DEFAULT_LONGPRESS_LEN);
-static CBarometer* baro {NULL};
+static CBarometer* barometer {NULL};
+static CVariometer* variometer {NULL};
 
 //---[ Function declarations: ]-------------------------------------------------
 
-static void process_button_events();
 static void update_barometer(CBarometer* baro);
 static void process_barometer_data(CBarometer* baro);
 
@@ -56,44 +52,34 @@ void setup()
     // Initialize serial port
     SERIAL_BEGIN;
 
-    // Initialize button
-    goButton0.init();
-    goButton1.init();
-    delay(200);
-
     // Create barometer
-    baro = CFactoryBarometer::create(BARO_TYPE_MS5611);
-    err_code_t err {baro->setup()};
-
-    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" : 
+    barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
+    err_code_t err = barometer->setup();
+    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" :
                                          "INFO: Barometer ok");
+    if(ERR_CODE_NONE != err) while(true);
 
-    if (ERR_CODE_NONE != err) while (true);
+    variometer = CFactoryVariometer::create(VARIO_TYPE_FIP_V1);
+    err = variometer->setup();
+    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" :
+                   "INFO: Barometer ok");
+
+    if(ERR_CODE_NONE != err) while(true);
+
 }
 
 void loop()
 {
-    process_button_events();
-    update_barometer(baro);
-    process_barometer_data(baro);
+    update_barometer(barometer);
+    process_barometer_data(barometer);
 }
 
-static void process_button_events()
-{
-    eEvent event(goButton0.handle());
-    if (event == EV_SHORTPRESS);
-    if (event == EV_LONGPRESS);
-    event = goButton1.handle();
-    if (event == EV_SHORTPRESS);
-    if (event == EV_LONGPRESS);
-}
-
-static void update_barometer(CBarometer* const baro)
+static void update_barometer(CBarometer* baro)
 {
     baro->update();
 }
 
-static void process_barometer_data(CBarometer* const baro)
+static void process_barometer_data(CBarometer* baro)
 {
     std::string data_str {"Temperature: " + std::to_string(baro->get_temperature())};
     data_str += " Pressure: " + std::to_string(baro->get_pressure());

@@ -24,25 +24,22 @@ typedef enum barometer_type_e
 
 class CBarometer
 {
-  public:
+    public:
+        CBarometer(){};
+        virtual ~CBarometer(){}
 
-    CBarometer(){};
-    virtual ~CBarometer(){}
-
-    virtual err_code_t setup() {return ERR_CODE_SETUP;}
-    virtual void update() {};
-
-    // Handler, to be called in the loop()
-    virtual float get_pressure() const {return 0.0f;}
-    virtual float get_temperature() const {return 0.0f;}
+        virtual void update() {};
+        virtual err_code_t setup() {return ERR_CODE_SETUP;}
+        virtual float get_pressure() const {return 0.0f;}
+        virtual float get_temperature() const {return 0.0f;}
 };
 
 
 class CFactoryBarometer
 {
-  public:
-    virtual ~CFactoryBarometer(){};
-    static CBarometer* create(barometer_type_t type);
+    public:
+        virtual ~CFactoryBarometer(){};
+        static CBarometer* create(barometer_type_t type);
 };
 
 

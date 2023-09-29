@@ -1,6 +1,6 @@
 /** 
  *  @brief Variometer API and factory class declarations
- *   Variometers measure the rate of change of altitude by detecting the change 
+ *   Variometers measure the rate of change of altitude by detecting the change
  *   in air pressure (static pressure) as altitude changes.
  *  @author Cooked by vabarca (TT)
  */
@@ -12,7 +12,7 @@
 
 #include <cstdint>
 #include <string>
-#include <barometer.h>
+#include <barometer/barometer.h>
 #include <commons.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
@@ -27,16 +27,17 @@ typedef enum variometer_type_e
 
 class CVariometer
 {
-  public:
-    CVariometer(){}
-    virtual ~CVariometer(){}
+    public:
+        CVariometer(){}
+        virtual ~CVariometer(){}
+        virtual err_code_t setup(){ return ERR_CODE_NONE; };
 };
 
 class CFactoryVariometer
 {
-  public:
-    virtual ~CFactoryVariometer(){};
-    static CVariometer* create(variometer_type_t type, CBarometer& const baro);
+    public:
+        virtual ~CFactoryVariometer(){};
+        static CVariometer* create(variometer_type_t type);
 };
 
 

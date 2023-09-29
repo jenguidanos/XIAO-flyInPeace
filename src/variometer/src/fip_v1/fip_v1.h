@@ -8,19 +8,18 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include <variometer.h>
+#include <variometer/variometer.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
 class Cfip_v1 : public CVariometer
 {
     private:
-        CBarometer& const _baro;
 
     public:
-
-        explicit Cfip_v1(CBarometer& const baro) : _baro{baro} {}
-        virtual ~Cfip_v1(){}
+        Cfip_v1();
+        ~Cfip_v1(){}
+        err_code_t setup() override;
 };
 
 //------------------------------------------------------------------------------

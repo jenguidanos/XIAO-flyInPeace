@@ -1,21 +1,20 @@
 /** 
- *  @brief Atmospheric Pressure Sensor factory class definition
+ *  @brief Variometer factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include "ms5611/ms5611_wrapper.h"
-#include <barometer.h>
+#include "../variometer.h"
+#include "fip_v1/fip_v1.h"
 
 //------------------------------------------------------------------------------
 
-CBarometer* CFactoryBarometer::create(barometer_type_t type)
+CVariometer* CFactoryVariometer::create(variometer_type_t type)
 {
-    if(BARO_TYPE_MS5611 == type) return new CMS5611();
-    return new CBarometer();
+    if(VARIO_TYPE_FIP_V1 == type) return new Cfip_v1();
+    return new CVariometer();
 }
-
 
 //------------------------------------------------------------------------------
 

@@ -1,22 +1,32 @@
 /** 
- *  @brief Variometer factory class definition
+ *  @brief Atmospheric Pressure Sensor factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include "fip_v1/fip_v1.h"
-#include <variometer.h>
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
+#include "fip_v1.h"
 
 //------------------------------------------------------------------------------
 
-CVariometer* CFactoryVariometer::create(variometer_type_t type, CBarometer& const baro)
+Cfip_v1::Cfip_v1()
 {
-    if(VARIO_TYPE_FIP_V1 == type) return new Cfip_v1(baro);
-    return new CVariometer();
+
 }
 
+err_code_t Cfip_v1::setup()
+{
+    return ERR_CODE_NONE;
+}
 
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
+
+

@@ -21,10 +21,10 @@ class CMS5611 : public CBarometer
     public:
 
         CMS5611();
-        virtual ~CMS5611(){}
+        ~CMS5611(){}
 
-        virtual err_code_t setup() override;
-        virtual void update() override;
+        err_code_t setup() override;
+        void update() override;
         float get_pressure() const override;
         float get_temperature() const override;
 };
