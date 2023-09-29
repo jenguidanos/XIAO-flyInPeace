@@ -46,8 +46,8 @@ static CBarometer* baro {NULL};
 //---[ Function declarations: ]-------------------------------------------------
 
 static void process_button_events();
-static void update_barometer(CBarometer* const baro);
-static void process_barometer_data(CBarometer* const baro);
+static void update_barometer(CBarometer* baro);
+static void process_barometer_data(CBarometer* baro);
 
 //------------------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ void setup()
     SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" : 
                                          "INFO: Barometer ok");
 
-    if (ERR_CODE_NONE != err) while (1);
+    if (ERR_CODE_NONE != err) while (true);
 }
 
 void loop()

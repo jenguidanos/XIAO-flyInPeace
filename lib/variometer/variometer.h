@@ -12,8 +12,8 @@
 
 #include <cstdint>
 #include <string>
-#include <barometer/barometer.h>
-#include <commons/commons.h>
+#include <barometer.h>
+#include <commons.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
