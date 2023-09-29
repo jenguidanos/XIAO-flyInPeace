@@ -13,7 +13,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CMS5611 : public CBarometer
+class CMS5611 : public Cfip_dev
 {
     private:
         MS5611 baro;

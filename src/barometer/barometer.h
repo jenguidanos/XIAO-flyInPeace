@@ -22,24 +22,12 @@ typedef enum barometer_type_e
     BARO_TYPE_MAX_NUM
 }barometer_type_t;
 
-class CBarometer
-{
-    public:
-        CBarometer(){};
-        virtual ~CBarometer(){}
-
-        virtual void update() {};
-        virtual err_code_t setup() {return ERR_CODE_SETUP;}
-        virtual float get_pressure() const {return 0.0f;}
-        virtual float get_temperature() const {return 0.0f;}
-};
-
 
 class CFactoryBarometer
 {
     public:
         virtual ~CFactoryBarometer(){};
-        static CBarometer* create(barometer_type_t type);
+        static Cfip_dev* create(barometer_type_t type);
 };
 
 

@@ -25,19 +25,11 @@ typedef enum variometer_type_e
     VARIO_TYPE_MAX_NUM
 }variometer_type_t;
 
-class CVariometer
-{
-    public:
-        CVariometer(){}
-        virtual ~CVariometer(){}
-        virtual err_code_t setup(){ return ERR_CODE_NONE; };
-};
-
 class CFactoryVariometer
 {
-    public:
-        virtual ~CFactoryVariometer(){};
-        static CVariometer* create(variometer_type_t type);
+public:
+    virtual ~CFactoryVariometer(){};
+    static Cfip_vario* create(variometer_type_t type, Cfip_dev& barometer);
 };
 
 

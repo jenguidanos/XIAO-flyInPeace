@@ -37,13 +37,13 @@
 
 //---[ Globals: ]---------------------------------------------------------------
 
-static CBarometer* barometer {NULL};
-static CVariometer* variometer {NULL};
+static Cfip_dev* barometer {NULL};
+static Cfip_vario* variometer {NULL};
 
 //---[ Function declarations: ]-------------------------------------------------
 
-static void update_barometer(CBarometer* baro);
-static void process_barometer_data(CBarometer* baro);
+static void update_barometer(Cfip_dev* baro);
+static void process_barometer_data(Cfip_dev* baro);
 
 //------------------------------------------------------------------------------
 
@@ -59,13 +59,12 @@ void setup()
                                          "INFO: Barometer ok");
     if(ERR_CODE_NONE != err) while(true);
 
-    variometer = CFactoryVariometer::create(VARIO_TYPE_FIP_V1);
+    variometer = CFactoryVariometer::create(VARIO_TYPE_FIP_V1, *barometer);
     err = variometer->setup();
-    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" :
-                   "INFO: Barometer ok");
+    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup variometer" :
+                                         "INFO: Variometer ok");
 
     if(ERR_CODE_NONE != err) while(true);
-
 }
 
 void loop()
@@ -74,12 +73,12 @@ void loop()
     process_barometer_data(barometer);
 }
 
-static void update_barometer(CBarometer* baro)
+static void update_barometer(Cfip_dev* baro)
 {
     baro->update();
 }
 
-static void process_barometer_data(CBarometer* baro)
+static void process_barometer_data(Cfip_dev* baro)
 {
     std::string data_str {"Temperature: " + std::to_string(baro->get_temperature())};
     data_str += " Pressure: " + std::to_string(baro->get_pressure());

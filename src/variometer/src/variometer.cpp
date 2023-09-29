@@ -10,12 +10,13 @@
 
 //------------------------------------------------------------------------------
 
-CVariometer* CFactoryVariometer::create(variometer_type_t type)
+Cfip_vario* CFactoryVariometer::create(variometer_type_t type, Cfip_dev& barometer)
 {
-    if(VARIO_TYPE_FIP_V1 == type) return new Cfip_v1();
-    return new CVariometer();
+    if(VARIO_TYPE_FIP_V1 == type) return new Cfip_v1(barometer);
+    return new Cfip_vario();
 }
 
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
+
