@@ -34,6 +34,8 @@
 #include <commons.h>
 #include <barometer/barometer.h>
 #include <variometer/variometer.h>
+#include <iomanip>
+#include <sstream>
 
 //---[ Globals: ]---------------------------------------------------------------
 
@@ -80,10 +82,10 @@ static void update_variometer(Cfip_vario* vario)
 
 static void process_variometer_data(Cfip_vario* vario)
 {
-    std::string data_str {"Temperature: " + std::to_string(vario->get_temperature())};
-    data_str += " Pressure: " + std::to_string(vario->get_pressure());
-    
-    SERIAL_PRINTLN(data_str.c_str());
+    std::stringstream ss;
+    ss << "Temperature: " << std::fixed << std::setprecision(2) << vario->get_temperature();
+    ss << " Pressure: " << std::fixed << std::setprecision(2) << vario->get_pressure();
+    SERIAL_PRINTLN(ss.str().c_str());
 }
 
 //------------------------------------------------------------------------------
