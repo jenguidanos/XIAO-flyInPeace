@@ -20,7 +20,7 @@
 typedef enum vario_type_e
 {   
     VARIO_TYPE_UNKNOWN,
-    VARIO_TYPE_FIP_V1,
+    VARIO_TYPE_V1,
 
     VARIO_TYPE_MAX_NUM
 }vario_type_t;
