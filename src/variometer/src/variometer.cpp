@@ -6,13 +6,13 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include "../variometer.h"
-#include "fip_v1/fip_v1.h"
+#include "variometer/src/fip_v1/vario_v1.h"
 
 //------------------------------------------------------------------------------
 
-Cfip_vario* CFactoryVariometer::create(variometer_type_t type, Cfip_dev& barometer)
+Cfip_vario* CFactoryVariometer::create(vario_type_t type, Cfip_dev& barometer)
 {
-    if(VARIO_TYPE_FIP_V1 == type) return new Cfip_v1(barometer);
+    if(VARIO_TYPE_FIP_V1 == type) return new CVario_v1(barometer);
     return new Cfip_vario();
 }
 

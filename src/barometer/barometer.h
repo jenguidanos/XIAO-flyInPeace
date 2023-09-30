@@ -14,20 +14,20 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-typedef enum barometer_type_e
+typedef enum baro_type_e
 {   
     BARO_TYPE_UNKNOWN,
     BARO_TYPE_MS5611,
 
     BARO_TYPE_MAX_NUM
-}barometer_type_t;
+}baro_type_t;
 
 
 class CFactoryBarometer
 {
     public:
         virtual ~CFactoryBarometer(){};
-        static Cfip_dev* create(barometer_type_t type);
+        static Cfip_dev* create(baro_type_t type);
 };
 
 

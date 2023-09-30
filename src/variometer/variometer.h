@@ -17,19 +17,19 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-typedef enum variometer_type_e
+typedef enum vario_type_e
 {   
     VARIO_TYPE_UNKNOWN,
     VARIO_TYPE_FIP_V1,
 
     VARIO_TYPE_MAX_NUM
-}variometer_type_t;
+}vario_type_t;
 
 class CFactoryVariometer
 {
 public:
     virtual ~CFactoryVariometer(){};
-    static Cfip_vario* create(variometer_type_t type, Cfip_dev& barometer);
+    static Cfip_vario* create(vario_type_t type, Cfip_dev& barometer);
 };
 
 

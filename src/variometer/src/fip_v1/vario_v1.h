@@ -12,7 +12,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class Cfip_v1 : public Cfip_vario
+class CVario_v1 : public Cfip_vario
 {
     private:
     Cfip_dev& _barometer;
@@ -21,8 +21,8 @@ class Cfip_v1 : public Cfip_vario
     float _altitude;
 
     public:
-        explicit Cfip_v1(Cfip_dev& barometer) : _barometer{barometer} {};
-        ~Cfip_v1(){}
+        explicit CVario_v1(Cfip_dev& barometer) : _barometer{barometer} {};
+        ~CVario_v1(){}
         err_code_t setup() override;
         void update() override;
         float get_pressure() const override {return _barometer.get_pressure();};
