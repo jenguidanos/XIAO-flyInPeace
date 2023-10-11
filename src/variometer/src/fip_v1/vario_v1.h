@@ -15,13 +15,13 @@
 class CVario_v1 : public Cfip_vario
 {
     private:
-    Cfip_dev& _barometer;
+    Cfip_barometer& _barometer;
     float _delta_h;
     float _delta_t;
     float _altitude;
 
     public:
-        explicit CVario_v1(Cfip_dev& barometer) : _barometer{barometer} {};
+        explicit CVario_v1(Cfip_barometer& barometer) : _barometer{barometer} {};
         ~CVario_v1(){}
         err_code_t setup() override;
         void update() override;

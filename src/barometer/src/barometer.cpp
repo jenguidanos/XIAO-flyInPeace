@@ -10,10 +10,10 @@
 
 //------------------------------------------------------------------------------
 
-Cfip_dev* CFactoryBarometer::create(baro_type_t type)
+Cfip_barometer* CFactoryBarometer::create(baro_type_t type)
 {
     if(BARO_TYPE_MS5611 == type) return new CMS5611();
-    return new Cfip_dev();
+    return new Cfip_barometer();
 }
 
 

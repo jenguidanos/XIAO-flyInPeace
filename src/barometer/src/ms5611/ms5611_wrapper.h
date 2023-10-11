@@ -13,7 +13,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CMS5611 : public Cfip_dev
+class CMS5611 : public Cfip_barometer
 {
     private:
         MS5611 baro;
@@ -21,7 +21,7 @@ class CMS5611 : public Cfip_dev
     public:
 
         CMS5611();
-        ~CMS5611(){}
+        ~CMS5611()= default;
 
         err_code_t setup() override;
         void update() override;

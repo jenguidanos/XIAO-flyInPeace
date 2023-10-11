@@ -26,8 +26,8 @@ typedef enum baro_type_e
 class CFactoryBarometer
 {
     public:
-        virtual ~CFactoryBarometer(){};
-        static Cfip_dev* create(baro_type_t type);
+        virtual ~CFactoryBarometer()= default;
+        static Cfip_barometer* create(baro_type_t type);
 };
 
 

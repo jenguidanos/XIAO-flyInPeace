@@ -28,8 +28,8 @@ typedef enum vario_type_e
 class CFactoryVariometer
 {
 public:
-    virtual ~CFactoryVariometer(){};
-    static Cfip_vario* create(vario_type_t type, Cfip_dev& barometer);
+    virtual ~CFactoryVariometer()= default;
+    static Cfip_vario* create(vario_type_t type, Cfip_barometer& barometer);
 };
 
 

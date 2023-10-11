@@ -39,7 +39,7 @@
 
 //---[ Globals: ]---------------------------------------------------------------
 
-static Cfip_dev* barometer {NULL};
+static Cfip_barometer* barometer {NULL};
 static Cfip_vario* variometer {NULL};
 
 //---[ Function declarations: ]-------------------------------------------------
