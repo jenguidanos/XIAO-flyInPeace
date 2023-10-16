@@ -39,8 +39,7 @@
 
 //---[ Globals: ]---------------------------------------------------------------
 
-static Cfip_barometer* barometer {NULL};
-static Cfip_vario* variometer {NULL};
+static Cfip_vario* variometer {nullptr};
 
 //---[ Function declarations: ]-------------------------------------------------
 
@@ -55,7 +54,7 @@ void setup()
     SERIAL_BEGIN;
 
     // Create barometer
-    barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
+    Cfip_barometer* barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
     err_code_t err = barometer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup barometer" :
                                          "INFO: Barometer ok");
@@ -85,6 +84,7 @@ static void process_variometer_data(Cfip_vario* vario)
     std::stringstream ss;
     ss << "Temperature: " << std::fixed << std::setprecision(2) << vario->get_temperature();
     ss << " Pressure: " << std::fixed << std::setprecision(2) << vario->get_pressure();
+    ss << " Altitude: " << std::fixed << std::setprecision(1) << vario->get_altitude();
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
