@@ -20,19 +20,30 @@ err_code_t CVario_v1::setup()
     return ERR_CODE_NONE;
 }
 
+const float CVario_v1::_termA{1.0f / 5.257f};
+const float CVario_v1::_termB{0.0065f};
+const float CVario_v1::_termC{5.257f};
+
 void CVario_v1::update()
 {
-    const float termA = 1.0f / 5.257f;
-
     _barometer.update();
     _pressure = _barometer.get_pressure();
     _temperature = _barometer.get_temperature();
-    _altitude = (((pow((_sea_level_pressure / _pressure), termA) - 1.0f) * (_temperature + 273.15f)) / 0.0065f);
+    _altitude = (((pow((_sea_level_pressure / _pressure), _termA) - 1.0f) * (_temperature + ABSOLUTE_ZERO)) / _termB);
+    _sample_time = millis();
 }
 
 void CVario_v1::set_altitude(float altitude)
 {
+    _sea_level_pressure = pow(((_termB * altitude) / (_temperature + ABSOLUTE_ZERO) + 1.0f), _termC) * _pressure;
+}
 
+void CVario_v1::get_delta(float& h, float &t)
+{
+    h = _altitude - _prev_altitude;
+    t = _sample_time - _prev_sample_time;
+    _prev_altitude = _altitude;
+    _prev_sample_time = _sample_time;
 }
 
 //------------------------------------------------------------------------------

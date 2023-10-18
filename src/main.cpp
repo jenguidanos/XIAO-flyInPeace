@@ -82,9 +82,14 @@ static void update_variometer(Cfip_vario* vario)
 static void process_variometer_data(Cfip_vario* vario)
 {
     std::stringstream ss;
-    ss << "Temperature: " << std::fixed << std::setprecision(2) << vario->get_temperature();
-    ss << " Pressure: " << std::fixed << std::setprecision(2) << vario->get_pressure();
-    ss << " Altitude: " << std::fixed << std::setprecision(1) << vario->get_altitude();
+    float h;
+    float t;
+    vario->get_delta(h, t);
+    ss << "Temperature: " << std::setw(6) << std::fixed << std::setprecision(2) << vario->get_temperature();
+    ss << " Pressure: " << std::setw(8) << std::fixed << std::setprecision(2) << vario->get_pressure();
+    ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << vario->get_altitude();
+    ss << " delta h: " << std::setw(8) << std::fixed << std::setprecision(3) << h;
+    ss << " delta t: " << std::setw(8) << std::fixed << std::setprecision(3) << t;
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
