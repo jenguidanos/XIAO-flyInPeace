@@ -9,6 +9,7 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include <variometer/variometer.h>
+#include <persistence/persistence.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
@@ -19,6 +20,7 @@ private:
     static const float _termB;
     static const float _termC;
     Cfip_barometer& _barometer;
+    Cpersistence _persistence;
     float _altitude;
     float _prev_altitude;
     float _sample_time;

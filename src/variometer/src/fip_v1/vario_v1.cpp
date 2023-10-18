@@ -11,12 +11,24 @@
   #include "WProgram.h"
 #endif
 
+#include <cmath>
 #include "vario_v1.h"
+#include <persistence/persistence.h>
 
 //------------------------------------------------------------------------------
 
 err_code_t CVario_v1::setup()
 {
+    _persistence.setup();
+    _persistence.read(0, _sea_level_pressure);
+
+    if(isnan(_sea_level_pressure))
+    {
+        /*Just for the first time*/
+        _sea_level_pressure = SEA_LEVEL_PRESSURE;
+        _persistence.write(0, _sea_level_pressure);
+    }
+
     return ERR_CODE_NONE;
 }
 
@@ -36,6 +48,7 @@ void CVario_v1::update()
 void CVario_v1::set_altitude(float altitude)
 {
     _sea_level_pressure = pow(((_termB * altitude) / (_temperature + ABSOLUTE_ZERO) + 1.0f), _termC) * _pressure;
+    _persistence.write(0, _sea_level_pressure);
 }
 
 void CVario_v1::get_delta(float& h, float &t)
