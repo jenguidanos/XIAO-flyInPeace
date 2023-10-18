@@ -21,7 +21,7 @@ CButtonHandler::CButtonHandler(int p, int lp)
   ,_generated_event(false)
   ,_pressed_counter(0)
   ,_pin(p)
-  ,_longpress_len(lp)
+  ,_long_press_len(lp)
   ,_lastLoopTime(0)
 {
 }
@@ -53,18 +53,18 @@ eEvent CButtonHandler::handle()
   if (!now_pressed && _was_pressed && !_generated_event)
   {
     // handle release event
-    if (_pressed_counter < _longpress_len)
-      event = EV_SHORTPRESS;
+    if (_pressed_counter < _long_press_len)
+      event = EV_SHORT_PRESS;
     else
-      event = EV_LONGPRESS;
+      event = EV_LONG_PRESS;
   }
   else if (now_pressed && _was_pressed)
   {
     // handle release event
-    if (_pressed_counter > _longpress_len)
+    if (_pressed_counter > _long_press_len)
     {
       _pressed_counter = 0;
-      event = EV_LONGPRESS;
+      event = EV_LONG_PRESS;
       _generated_event = true;
     }
   }
@@ -97,7 +97,7 @@ CTheUltimateDebouncer::CTheUltimateDebouncer(uint8_t p)
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_pressed(void)
+uint8_t CTheUltimateDebouncer::is_pressed()
 {
   _button_history = _button_history << 1;
   _button_history |= digitalRead(_pin);
@@ -111,7 +111,7 @@ uint8_t CTheUltimateDebouncer::is_pressed(void)
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_released(void)
+uint8_t CTheUltimateDebouncer::is_released()
 {
   _button_history = _button_history << 1;
   _button_history |= digitalRead(_pin);
@@ -125,14 +125,14 @@ uint8_t CTheUltimateDebouncer::is_released(void)
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_down(void)
+uint8_t CTheUltimateDebouncer::is_down() const
 {
   return (_button_history == B11111111);
 }
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_up(void)
+uint8_t CTheUltimateDebouncer::is_up() const
 {
   return (_button_history == B00000000);
 }

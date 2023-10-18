@@ -4,8 +4,8 @@
  *  @author Cooked by Vicente A. (TT)
  */
 
-#ifndef CBUTTONHANDLER_H
-#define CBUTTONHANDLER_H
+#ifndef BUTTON_HANDLER_H
+#define BUTTON_HANDLER_H
 
 //---[ Includes: ]--------------------------------------------------------------
 
@@ -17,36 +17,34 @@
 
 //---[ Global defines: ]--------------------------------------------------------
 
-#define DEFAULT_LONGPRESS_LEN    30  // Min nr of loops for a long press
+#define DEFAULT_LONG_PRESS_LEN    30  // Min nr of loops for a long press
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
 enum eEvent
 {
-  EV_NONE=0
-  ,EV_SHORTPRESS
-  ,EV_LONGPRESS
+    EV_NONE=0
+    ,EV_SHORT_PRESS
+    ,EV_LONG_PRESS
 };
 
 //------------------------------------------------------------------------------
 
 class CButtonHandler
 {
-  protected:
-
+protected:
     boolean         _was_pressed;     // previous state
-    boolean         _generated_event; // generated event before relese button
+    boolean         _generated_event; // generated event before release button
     int             _pressed_counter; // press running duration
     const uint8_t   _pin;             // pin to which button is connected
-    const int       _longpress_len;   // longpress duration
+    const int       _long_press_len;   // long-press duration
     long            _lastLoopTime;
 
-  public:
+public:
+    explicit CButtonHandler(int pin, int long_press_len=DEFAULT_LONG_PRESS_LEN);
+    ~CButtonHandler()= default;
 
-    CButtonHandler(int pin, int longpress_len=DEFAULT_LONGPRESS_LEN);
-    ~CButtonHandler(){}
-
-   // Initialization done after construction, to permit static instances
+    // Initialization done after construction, to permit static instances
     void init();
 
     // Handler, to be called in the loop()
@@ -58,22 +56,22 @@ class CButtonHandler
 
 class CTheUltimateDebouncer
 {
-  protected:
+protected:
 
     uint8_t         _button_history;
     const uint8_t   _pin;             // pin to which button is connected
 
-  public:
+public:
 
-    CTheUltimateDebouncer(uint8_t pin);
-    ~CTheUltimateDebouncer(){}
+    explicit CTheUltimateDebouncer(uint8_t pin);
+    ~CTheUltimateDebouncer()= default;
 
-    uint8_t is_pressed(void);
-    uint8_t is_released(void);
-    uint8_t is_down(void);
-    uint8_t is_up(void);
+    uint8_t is_pressed();
+    uint8_t is_released();
+    uint8_t is_down() const;
+    uint8_t is_up() const;
 };
 
 //------------------------------------------------------------------------------
 
-#endif /* CBUTTONHANDLER_H */
+#endif /* BUTTON_HANDLER_H */
