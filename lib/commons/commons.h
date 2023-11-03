@@ -8,7 +8,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-const float SEA_LEVEL_PRESSURE {1013.25};
+const float DEFAULT_SEA_LEVEL_PRESSURE {1013.25};
 const float ABSOLUTE_ZERO {273.15f};
 
 typedef enum err_code_e

@@ -38,7 +38,7 @@ public:
         _prev_sample_time{0.0f},
         _pressure{0.0f},
         _temperature{0.0f},
-        _sea_level_pressure{SEA_LEVEL_PRESSURE}
+        _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE}
         {};
     ~CVario_v1(){}
 

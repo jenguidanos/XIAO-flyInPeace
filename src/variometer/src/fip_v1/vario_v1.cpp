@@ -25,7 +25,7 @@ err_code_t CVario_v1::setup()
     if(isnan(_sea_level_pressure))
     {
         /*Just for the first time*/
-        _sea_level_pressure = SEA_LEVEL_PRESSURE;
+        _sea_level_pressure = DEFAULT_SEA_LEVEL_PRESSURE;
         _persistence.write(0, _sea_level_pressure);
     }
 
