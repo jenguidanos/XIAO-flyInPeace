@@ -1,3 +1,3 @@
 # XIAO flyInPeace
 
-XIAO paragliding development for, basically, flying in peace
+XIAO paragliding development to, basically, fly in peace
