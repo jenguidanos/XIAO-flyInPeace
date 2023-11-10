@@ -10,6 +10,7 @@
 
 #include <variometer/variometer.h>
 #include <persistence/persistence.h>
+#include <SimpleKalmanFilter.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
@@ -19,6 +20,7 @@ private:
     static const float _termA;
     static const float _termB;
     static const float _termC;
+    static const float _millis_in_a_second;
     Cfip_barometer& _barometer;
     Cpersistence _persistence;
     float _altitude;
@@ -28,6 +30,8 @@ private:
     float _pressure;
     float _temperature;
     float _sea_level_pressure;
+    float _vario;
+    SimpleKalmanFilter _varioKalmanFilter;
 
 public:
     explicit CVario_v1(Cfip_barometer& barometer) :
@@ -38,8 +42,9 @@ public:
         _prev_sample_time{0.0f},
         _pressure{0.0f},
         _temperature{0.0f},
-        _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE}
-        {};
+        _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
+        _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)}
+        {}
     ~CVario_v1(){}
 
     err_code_t setup() override;
@@ -49,7 +54,10 @@ public:
     float get_pressure() const override {return _pressure;};
     float get_temperature() const override {return _temperature;};
     float get_altitude() const override {return _altitude;};
-    void get_delta(float &h, float &t) override;
+    float get_vario() override {return _vario;};
+    
+private:
+    void update_vario();    
 };
 
 //------------------------------------------------------------------------------

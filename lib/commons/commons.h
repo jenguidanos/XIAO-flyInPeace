@@ -1,3 +1,4 @@
+
 /** 
  *  @brief Commons definitions and utils
  *  @author Cooked by vabarca (TT)
@@ -36,7 +37,7 @@ class Cfip_vario : public Cfip_barometer
 public:
     virtual void set_altitude(float altitude) {};
     virtual float get_altitude() const {return 0.0f;}
-    virtual void get_delta(float &h, float &t) {h = 0.0f; t = 0.0f;}
+    virtual float get_vario() {return 0.0f;}
 };
 
 //------------------------------------------------------------------------------

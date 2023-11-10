@@ -18,6 +18,7 @@ public:
     ~Cpersistence()= default;
 
     void setup();
+
     template <class T> int write(int ee, const T& target);
     template <class T> int read(int ee, T& target);
 };
