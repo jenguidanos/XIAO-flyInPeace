@@ -1,0 +1,45 @@
+/** 
+ *  @brief AD9833 sound handler definition
+ *  @author Cooked by Vicente A. (TT)
+ */
+
+//---[ Includes: ]--------------------------------------------------------------
+
+#include <SPI.h>
+#include "ad9833.h"
+
+//------------------------------------------------------------------------------
+
+const uint8_t AD9833::_pin_data = 10;	///< SPI Data pin number
+const uint8_t AD9833::_pin_clk = 8;		///< SPI Clock pin number
+const uint8_t AD9833::_pin_fsync = 5;	///< SPI Load pin number (FSYNC in AD9833 usage)
+const uint8_t AD9833::_pin_shutdown = 3;	///< SPI Load pin number (FSYNC in AD9833 usage)
+
+AD9833::AD9833(): ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync)
+{
+    ad.begin();
+    ad.setMode(MD_AD9833::MODE_SINE);
+    pinMode(AD9833::_pin_shutdown,OUTPUT);
+}
+
+void AD9833::set_vario(float vario)
+{
+    ad.setFrequency(MD_AD9833::CHAN_0, 200);
+}
+
+void AD9833::powerdown(void)
+{
+    digitalWrite(AD9833::_pin_shutdown, HIGH);
+}
+
+void AD9833::powerup(void)
+{
+    digitalWrite(AD9833::_pin_shutdown, LOW);
+}
+    
+
+//------------------------------------------------------------------------------
+
+// -- END OF FILE --
+
+

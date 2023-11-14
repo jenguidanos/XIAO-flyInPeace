@@ -34,17 +34,20 @@
 #include <commons.h>
 #include <barometer/barometer.h>
 #include <variometer/variometer.h>
+#include <sound/sound.h>
 #include <iomanip>
 #include <sstream>
+
 
 //---[ Globals: ]---------------------------------------------------------------
 
 static Cfip_vario* variometer {nullptr};
+static Cfip_sound* sound {nullptr};
 
 //---[ Function declarations: ]-------------------------------------------------
 
 static void update_variometer(Cfip_vario* vario);
-static void process_variometer_data(Cfip_vario* vario);
+static void print_variometer(Cfip_vario* vario);
 
 //------------------------------------------------------------------------------
 
@@ -64,6 +67,9 @@ void setup()
     err = variometer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup variometer" :
                                          "INFO: Variometer ok");
+    
+
+    sound = CFactorySound::create(SOUND_TYPE_AD9833);
 
     if(ERR_CODE_NONE != err) while(true);
 }
@@ -71,7 +77,8 @@ void setup()
 void loop()
 {
     update_variometer(variometer);
-    process_variometer_data(variometer);
+    print_variometer(variometer);
+    sound->set_vario(variometer->get_vario());
 }
 
 static void update_variometer(Cfip_vario* vario)
@@ -79,12 +86,12 @@ static void update_variometer(Cfip_vario* vario)
     vario->update();
 }
 
-static void process_variometer_data(Cfip_vario* vario)
+static void print_variometer(Cfip_vario* vario)
 {
     std::stringstream ss;
     float h;
     float t;
-    ss << "Temperature: " << std::setw(6) << std::fixed << std::setprecision(2) << vario->get_temperature();
+    ss << " Temperature: " << std::setw(6) << std::fixed << std::setprecision(2) << vario->get_temperature();
     ss << " Pressure: " << std::setw(8) << std::fixed << std::setprecision(2) << vario->get_pressure();
     ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << vario->get_altitude();
     ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << vario->get_vario();
