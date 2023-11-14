@@ -27,9 +27,10 @@ private:
 
 public:
 
-    AD9833();
+    AD9833(): ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync){}
     ~AD9833()=default;
 
+    err_code_t setup() override;
     void set_vario(float vario) override;
 };
 

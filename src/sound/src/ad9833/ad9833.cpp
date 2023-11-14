@@ -15,11 +15,12 @@ const uint8_t AD9833::_pin_clk = 8;		///< SPI Clock pin number
 const uint8_t AD9833::_pin_fsync = 5;	///< SPI Load pin number (FSYNC in AD9833 usage)
 const uint8_t AD9833::_pin_shutdown = 3;	///< SPI Load pin number (FSYNC in AD9833 usage)
 
-AD9833::AD9833(): ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync)
+err_code_t AD9833::setup()
 {
     ad.begin();
     ad.setMode(MD_AD9833::MODE_SINE);
     pinMode(AD9833::_pin_shutdown,OUTPUT);
+    return ERR_CODE_NONE;
 }
 
 void AD9833::set_vario(float vario)

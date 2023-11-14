@@ -24,14 +24,22 @@ typedef enum err_code_e
     ERR_CODE_MAX_NUM
 }err_code_t;
 
-class Cfip_barometer
+class Cfip_obj
+{
+public:
+    Cfip_obj()= default;
+    virtual ~Cfip_obj()= default;
+
+    virtual void update() {};
+    virtual err_code_t setup() {return ERR_CODE_SETUP;}
+};
+
+class Cfip_barometer: public Cfip_obj
 {
 public:
     Cfip_barometer()= default;
     virtual ~Cfip_barometer()= default;
 
-    virtual void update() {};
-    virtual err_code_t setup() {return ERR_CODE_SETUP;}
     virtual float get_pressure() const {return 0.0f;}
     virtual float get_temperature() const {return 0.0f;}
     virtual void print(std::stringstream& ss) const {}
@@ -45,7 +53,7 @@ public:
     virtual float get_vario() const {return 0.0f;}
 };
 
-class Cfip_sound 
+class Cfip_sound : public Cfip_obj
 {
 public:
     virtual void set_vario(float vario) {};

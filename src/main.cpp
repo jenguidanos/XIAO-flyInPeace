@@ -42,6 +42,9 @@ void setup()
                                          "INFO: Variometer ok");
     
     sound = CFactorySound::create(SOUND_TYPE_AD9833);
+    err = sound->setup();
+    SERIAL_PRINTLN(ERR_CODE_NONE != err? "ERROR: Unable to setup sound" :
+                                         "INFO: sound ok");
 
     if(ERR_CODE_NONE != err) while(true);
 }
