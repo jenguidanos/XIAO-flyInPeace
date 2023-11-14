@@ -54,7 +54,8 @@ public:
     float get_pressure() const override {return _pressure;};
     float get_temperature() const override {return _temperature;};
     float get_altitude() const override {return _altitude;};
-    float get_vario() override {return _vario;};
+    float get_vario() const override {return _vario;};
+    void print(std::stringstream& ss) const override;
     
 private:
     void update_vario();    

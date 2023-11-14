@@ -12,6 +12,7 @@
 #endif
 
 #include <Wire.h>
+#include <iomanip>
 #include "ms5611_wrapper.h"
 
 //------------------------------------------------------------------------------
@@ -41,6 +42,13 @@ float CMS5611::get_temperature() const
 {
     return baro.getTemperature();
 }
+
+void CMS5611::print(std::stringstream &ss) const
+{
+    ss << " Temperature: " << std::setw(6) << std::fixed << std::setprecision(2) << get_temperature();
+    ss << " Pressure: " << std::setw(8) << std::fixed << std::setprecision(2) << get_pressure();
+}
+
 
 //------------------------------------------------------------------------------
 

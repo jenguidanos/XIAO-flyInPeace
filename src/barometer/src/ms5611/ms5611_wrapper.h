@@ -27,6 +27,7 @@ class CMS5611 : public Cfip_barometer
         void update() override;
         float get_pressure() const override;
         float get_temperature() const override;
+        void print(std::stringstream& ss) const override;
 };
 
 //------------------------------------------------------------------------------

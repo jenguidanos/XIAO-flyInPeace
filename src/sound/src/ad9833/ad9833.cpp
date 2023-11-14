@@ -37,7 +37,6 @@ void AD9833::powerup(void)
     digitalWrite(AD9833::_pin_shutdown, LOW);
 }
     
-
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --

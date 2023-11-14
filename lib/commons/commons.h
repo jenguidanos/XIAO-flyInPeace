@@ -7,6 +7,10 @@
 #ifndef COMMONS_H
 #define COMMONS_H
 
+//---[ Includes: ]--------------------------------------------------------------
+
+#include <sstream>
+
 //---[ Typedefs: ]--------------------------------------------------------------
 
 const float DEFAULT_SEA_LEVEL_PRESSURE {1013.25};
@@ -30,6 +34,7 @@ public:
     virtual err_code_t setup() {return ERR_CODE_SETUP;}
     virtual float get_pressure() const {return 0.0f;}
     virtual float get_temperature() const {return 0.0f;}
+    virtual void print(std::stringstream& ss) const {}
 };
 
 class Cfip_vario : public Cfip_barometer
@@ -37,7 +42,7 @@ class Cfip_vario : public Cfip_barometer
 public:
     virtual void set_altitude(float altitude) {};
     virtual float get_altitude() const {return 0.0f;}
-    virtual float get_vario() {return 0.0f;}
+    virtual float get_vario() const {return 0.0f;}
 };
 
 class Cfip_sound 
