@@ -40,6 +40,12 @@ public:
     virtual float get_vario() {return 0.0f;}
 };
 
+class Cfip_sound 
+{
+public:
+    virtual void set_vario(float vario) {};
+};
+
 //------------------------------------------------------------------------------
 
 #endif /* COMMONS_H */
