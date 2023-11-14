@@ -1,5 +1,5 @@
 /** 
- *  @brief Atmospheric Pressure Sensor factory class definition
+ *  @brief Atmospheric Pressure Sensor definition
  *  @author Cooked by Vicente A. (TT)
  */
 

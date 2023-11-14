@@ -1,5 +1,5 @@
 /**
- *  @brief MS5611 Atmospheric Pressure Sensor device
+ *  @brief MS5611 Atmospheric Pressure Sensor device declaration
  *  @author Cooked by vabarca (TT)
  */
 
