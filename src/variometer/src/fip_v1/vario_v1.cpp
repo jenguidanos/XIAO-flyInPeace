@@ -14,6 +14,7 @@
 
 err_code_t CVario_v1::setup()
 {
+    _vario.setup();
     _persistence.setup();
     _persistence.read(0, _sea_level_pressure);
 
