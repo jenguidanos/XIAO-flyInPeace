@@ -13,6 +13,10 @@
 #include <persistence/persistence.h>
 #include <utils/utils.h>
 
+//---[ Define: ]----------------------------------------------------------------
+
+#define MOV_AVG_SAMPLE_NUMBER 16
+
 //---[ Typedefs: ]--------------------------------------------------------------
 
 class CVario_v1 : public Cfip_vario
@@ -45,7 +49,7 @@ public:
         _temperature{0.0f},
         _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
         _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)},
-        _vario{CMovAvg(32)}
+        _vario{CMovAvg(MOV_AVG_SAMPLE_NUMBER)}
         {}
     ~CVario_v1(){}
 
