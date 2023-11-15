@@ -5,16 +5,11 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
-#else
-  #include "WProgram.h"
-#endif
-
 #include <cmath>
 #include <iomanip>
 #include "vario_v1.h"
 #include <persistence/persistence.h>
+#include <utils/utils.h>
 
 //------------------------------------------------------------------------------
 
@@ -45,7 +40,8 @@ void CVario_v1::update()
     _temperature = _barometer.get_temperature();
     _altitude = (((pow((_sea_level_pressure / _pressure), CVario_v1::_termA) - 1.0f) * (_temperature + ABSOLUTE_ZERO)) / CVario_v1::_termB);
     _sample_time = millis();
-    update_vario();
+    _vario.push(calculate_vario());
+    _vario.update()
 }
 
 void CVario_v1::set_altitude(float altitude)
@@ -54,7 +50,7 @@ void CVario_v1::set_altitude(float altitude)
     _persistence.write(0, _sea_level_pressure);
 }
 
-void CVario_v1::update_vario()
+float CVario_v1::calculate_vario()
 {
     float h = _altitude - _prev_altitude;
     float t = _sample_time - _prev_sample_time;
@@ -63,7 +59,7 @@ void CVario_v1::update_vario()
 
     float vario{h * CVario_v1::_millis_in_a_second / t};
 
-    _vario = _varioKalmanFilter.updateEstimate(vario);
+    return _varioKalmanFilter.updateEstimate(vario);
 }
 
 void CVario_v1::print(std::stringstream& ss) const

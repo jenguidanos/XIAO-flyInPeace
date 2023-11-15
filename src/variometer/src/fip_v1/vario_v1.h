@@ -30,7 +30,8 @@ private:
     float _pressure;
     float _temperature;
     float _sea_level_pressure;
-    float _vario;
+    CMovAvg _vario;
+    //float _vario;
     SimpleKalmanFilter _varioKalmanFilter;
 
 public:
@@ -43,7 +44,8 @@ public:
         _pressure{0.0f},
         _temperature{0.0f},
         _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
-        _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)}
+        _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)},
+        _vario{CMovAvg(32)}
         {}
     ~CVario_v1(){}
 
@@ -54,11 +56,11 @@ public:
     float get_pressure() const override {return _pressure;};
     float get_temperature() const override {return _temperature;};
     float get_altitude() const override {return _altitude;};
-    float get_vario() const override {return _vario;};
+    float get_vario() const override {return _vario.get();};
     void print(std::stringstream& ss) const override;
     
 private:
-    void update_vario();    
+    float calculate_vario();    
 };
 
 //------------------------------------------------------------------------------
