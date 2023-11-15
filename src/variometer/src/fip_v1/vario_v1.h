@@ -8,9 +8,10 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
+#include <SimpleKalmanFilter.h>
 #include <variometer/variometer.h>
 #include <persistence/persistence.h>
-#include <SimpleKalmanFilter.h>
+#include <utils/utils.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
@@ -31,7 +32,6 @@ private:
     float _temperature;
     float _sea_level_pressure;
     CMovAvg _vario;
-    //float _vario;
     SimpleKalmanFilter _varioKalmanFilter;
 
 public:

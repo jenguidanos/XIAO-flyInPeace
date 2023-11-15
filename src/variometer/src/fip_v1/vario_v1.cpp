@@ -9,7 +9,6 @@
 #include <iomanip>
 #include "vario_v1.h"
 #include <persistence/persistence.h>
-#include <utils/utils.h>
 
 //------------------------------------------------------------------------------
 
@@ -41,7 +40,7 @@ void CVario_v1::update()
     _altitude = (((pow((_sea_level_pressure / _pressure), CVario_v1::_termA) - 1.0f) * (_temperature + ABSOLUTE_ZERO)) / CVario_v1::_termB);
     _sample_time = millis();
     _vario.push(calculate_vario());
-    _vario.update()
+    _vario.update();
 }
 
 void CVario_v1::set_altitude(float altitude)
