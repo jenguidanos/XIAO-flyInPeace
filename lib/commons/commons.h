@@ -59,6 +59,12 @@ public:
     virtual void set_vario(float vario) {};
 };
 
+class Cfip_visualizer : public Cfip_obj
+{
+public:
+    virtual void set_vario(float vario) {};
+};
+
 //------------------------------------------------------------------------------
 
 #endif /* COMMONS_H */
