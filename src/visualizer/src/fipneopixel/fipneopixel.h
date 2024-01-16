@@ -1,5 +1,5 @@
 /**
- *  @brief MS5611 Atmospheric Pressure Sensor device declaration
+ *  @brief Neopixel visualizer declaration
  *  @author Cooked by vabarca (TT)
  */
 
@@ -8,25 +8,22 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include <visualizer/barometer.h>
+#include <commons.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CMS5611 : public Cfip_barometer
+class CfipNeopixel : public Cfip_visualizer
 {
     private:
-        MS5611 baro;
+        uint8_t num_of_pixels;
 
     public:
 
-        CMS5611();
-        ~CMS5611()= default;
+        CfipNeopixel() : CfipNeopixel(1) {}
+        CfipNeopixel(uint8_t num_of_pixels);
+        ~CfipNeopixel()= default;
 
-        err_code_t setup() override;
-        void update() override;
-        float get_pressure() const override;
-        float get_temperature() const override;
-        void print(std::stringstream& ss) const override;
+         void set_vario(float vario) override;
 };
 
 //------------------------------------------------------------------------------

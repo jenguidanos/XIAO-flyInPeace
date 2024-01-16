@@ -1,12 +1,12 @@
 /** 
- *  @brief Atmospheric Pressure Sensor factory class definition
+ *  @brief Visualizer factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
 
 //---[ Includes: ]--------------------------------------------------------------
 
 #include <visualizer/visualizer.h>
-#include "fipeopixel/fipeopixel.h"
+#include "fipneopixel/fipneopixel.h"
 
 //------------------------------------------------------------------------------
 
