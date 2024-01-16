@@ -1,4 +1,4 @@
-/** 
+/**
  *  @brief Generic sound handler API and factory class declarations
  *  @author Cooked by vabarca (TT)
  */
@@ -13,19 +13,18 @@
 //---[ Typedefs: ]--------------------------------------------------------------
 
 typedef enum sound_type_e
-{   
+{
     SOUND_TYPE_UNKNOWN,
     SOUND_TYPE_AD9833,
 
     SOUND_TYPE_MAX_NUM
-}sound_type_t;
-
+} sound_type_t;
 
 class CFactorySound
 {
-public:
-    virtual ~CFactorySound()= default;
-    static Cfip_sound* create(sound_type_t type);
+  public:
+    virtual ~CFactorySound() = default;
+    static Cfip_sound *create(sound_type_t type);
 };
 
 //------------------------------------------------------------------------------

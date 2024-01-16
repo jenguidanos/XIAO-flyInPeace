@@ -1,4 +1,4 @@
-/** 
+/**
  *  @brief Generic Atmospheric Pressure Sensor API and factory class declarations
  *  @author Cooked by vabarca (TT)
  */
@@ -8,28 +8,26 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
+#include "commons.h"
 #include <cstdint>
 #include <string>
-#include "commons.h"
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
 typedef enum baro_type_e
-{   
+{
     BARO_TYPE_UNKNOWN,
     BARO_TYPE_MS5611,
 
     BARO_TYPE_MAX_NUM
-}baro_type_t;
-
+} baro_type_t;
 
 class CFactoryBarometer
 {
-    public:
-        virtual ~CFactoryBarometer()= default;
-        static Cfip_barometer* create(baro_type_t type);
+  public:
+    virtual ~CFactoryBarometer() = default;
+    static Cfip_barometer *create(baro_type_t type);
 };
-
 
 //------------------------------------------------------------------------------
 

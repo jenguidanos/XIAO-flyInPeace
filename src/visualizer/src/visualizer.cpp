@@ -1,21 +1,21 @@
-/** 
+/**
  *  @brief Visualizer factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include <visualizer/visualizer.h>
 #include "fipneopixel/fipneopixel.h"
+#include <visualizer/visualizer.h>
 
 //------------------------------------------------------------------------------
 
-Cfip_visualizer* CFactoryVisualizer::create(visualizer_type_t type)
+Cfip_visualizer *CFactoryVisualizer::create(visualizer_type_t type)
 {
-    if(BARO_TYPE_SINGLE_NEOPIXEL == type) return new CfipNeopixel(1);
+    if (BARO_TYPE_SINGLE_NEOPIXEL == type)
+        return new CfipNeopixel(1);
     return new Cfip_visualizer();
 }
-
 
 //------------------------------------------------------------------------------
 

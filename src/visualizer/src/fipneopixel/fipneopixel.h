@@ -14,16 +14,17 @@
 
 class CfipNeopixel : public Cfip_visualizer
 {
-    private:
-        uint8_t num_of_pixels;
+  private:
+    uint8_t num_of_pixels;
 
-    public:
+  public:
+    CfipNeopixel() : CfipNeopixel(1)
+    {
+    }
+    CfipNeopixel(uint8_t num_of_pixels);
+    ~CfipNeopixel() = default;
 
-        CfipNeopixel() : CfipNeopixel(1) {}
-        CfipNeopixel(uint8_t num_of_pixels);
-        ~CfipNeopixel()= default;
-
-         void set_vario(float vario) override;
+    void set_vario(float vario) override;
 };
 
 //------------------------------------------------------------------------------

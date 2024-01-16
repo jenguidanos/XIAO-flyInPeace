@@ -1,13 +1,13 @@
-/** 
+/**
  *  @brief Atmospheric Pressure Sensor factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
 
 //---[ Includes: ]--------------------------------------------------------------
 
+#include "vario_v1.h"
 #include <cmath>
 #include <iomanip>
-#include "vario_v1.h"
 #include <persistence/persistence.h>
 
 //------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ err_code_t CVario_v1::setup()
     _persistence.setup();
     _persistence.read(0, _sea_level_pressure);
 
-    if(isnan(_sea_level_pressure))
+    if (isnan(_sea_level_pressure))
     {
         /*Just for the first time*/
         _sea_level_pressure = DEFAULT_SEA_LEVEL_PRESSURE;
@@ -38,7 +38,8 @@ void CVario_v1::update()
     _barometer.update();
     _pressure = _barometer.get_pressure();
     _temperature = _barometer.get_temperature();
-    _altitude = (((pow((_sea_level_pressure / _pressure), CVario_v1::_termA) - 1.0f) * (_temperature + ABSOLUTE_ZERO)) / CVario_v1::_termB);
+    _altitude = (((pow((_sea_level_pressure / _pressure), CVario_v1::_termA) - 1.0f) * (_temperature + ABSOLUTE_ZERO)) /
+                 CVario_v1::_termB);
     _sample_time = millis();
     _vario.push(calculate_vario());
     _vario.update();
@@ -46,7 +47,8 @@ void CVario_v1::update()
 
 void CVario_v1::set_altitude(float altitude)
 {
-    _sea_level_pressure = _pressure * pow(((CVario_v1::_termB * altitude) / (_temperature + ABSOLUTE_ZERO) + 1.0f), CVario_v1::_termC);
+    _sea_level_pressure =
+        _pressure * pow(((CVario_v1::_termB * altitude) / (_temperature + ABSOLUTE_ZERO) + 1.0f), CVario_v1::_termC);
     _persistence.write(0, _sea_level_pressure);
 }
 
@@ -62,7 +64,7 @@ float CVario_v1::calculate_vario()
     return _varioKalmanFilter.updateEstimate(vario);
 }
 
-void CVario_v1::print(std::stringstream& ss) const
+void CVario_v1::print(std::stringstream &ss) const
 {
     _barometer.print(ss);
     ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << get_altitude();

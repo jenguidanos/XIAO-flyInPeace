@@ -1,4 +1,4 @@
-/** 
+/**
  *  @brief Buttons handler classes declaration
  *  @author Original from (C) 2011 By P. Bauermeister
  *  @author Cooked by Vicente A. (TT)
@@ -10,39 +10,39 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
+#include "Arduino.h"
 #else
-  #include "WProgram.h"
+#include "WProgram.h"
 #endif
 
 //---[ Global defines: ]--------------------------------------------------------
 
-#define DEFAULT_LONG_PRESS_LEN    30  // Min nr of loops for a long press
+#define DEFAULT_LONG_PRESS_LEN 30 // Min nr of loops for a long press
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
 enum eEvent
 {
-    EV_NONE=0
-    ,EV_SHORT_PRESS
-    ,EV_LONG_PRESS
+    EV_NONE = 0,
+    EV_SHORT_PRESS,
+    EV_LONG_PRESS
 };
 
 //------------------------------------------------------------------------------
 
 class CButtonHandler
 {
-protected:
-    boolean         _was_pressed;     // previous state
-    boolean         _generated_event; // generated event before release button
-    int             _pressed_counter; // press running duration
-    const uint8_t   _pin;             // pin to which button is connected
-    const int       _long_press_len;   // long-press duration
-    long            _lastLoopTime;
+  protected:
+    boolean _was_pressed;      // previous state
+    boolean _generated_event;  // generated event before release button
+    int _pressed_counter;      // press running duration
+    const uint8_t _pin;        // pin to which button is connected
+    const int _long_press_len; // long-press duration
+    long _lastLoopTime;
 
-public:
-    explicit CButtonHandler(int pin, int long_press_len=DEFAULT_LONG_PRESS_LEN);
-    ~CButtonHandler()= default;
+  public:
+    explicit CButtonHandler(int pin, int long_press_len = DEFAULT_LONG_PRESS_LEN);
+    ~CButtonHandler() = default;
 
     // Initialization done after construction, to permit static instances
     void init();
@@ -56,15 +56,13 @@ public:
 
 class CTheUltimateDebouncer
 {
-protected:
+  protected:
+    uint8_t _button_history;
+    const uint8_t _pin; // pin to which button is connected
 
-    uint8_t         _button_history;
-    const uint8_t   _pin;             // pin to which button is connected
-
-public:
-
+  public:
     explicit CTheUltimateDebouncer(uint8_t pin);
-    ~CTheUltimateDebouncer()= default;
+    ~CTheUltimateDebouncer() = default;
 
     uint8_t is_pressed();
     uint8_t is_released();

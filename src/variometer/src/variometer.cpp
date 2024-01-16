@@ -1,4 +1,4 @@
-/** 
+/**
  *  @brief Variometer factory class definition
  *  @author Cooked by Vicente A. (TT)
  */
@@ -10,13 +10,13 @@
 
 //------------------------------------------------------------------------------
 
-Cfip_vario* CFactoryVariometer::create(vario_type_t type, Cfip_barometer& barometer)
+Cfip_vario *CFactoryVariometer::create(vario_type_t type, Cfip_barometer &barometer)
 {
-    if(VARIO_TYPE_V1 == type) return new CVario_v1(barometer);
+    if (VARIO_TYPE_V1 == type)
+        return new CVario_v1(barometer);
     return new Cfip_vario();
 }
 
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
-

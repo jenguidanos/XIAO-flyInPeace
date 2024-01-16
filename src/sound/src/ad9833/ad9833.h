@@ -15,20 +15,21 @@
 
 class AD9833 : public Cfip_sound
 {
-private:
-    static const uint8_t _pin_data; ///< SPI Data pin number
-    static const uint8_t _pin_clk; ///< SPI Clock pin number
-    static const uint8_t _pin_fsync; ///< SPI Load pin number (FSYNC in AD9833 usage)
+  private:
+    static const uint8_t _pin_data;     ///< SPI Data pin number
+    static const uint8_t _pin_clk;      ///< SPI Clock pin number
+    static const uint8_t _pin_fsync;    ///< SPI Load pin number (FSYNC in AD9833 usage)
     static const uint8_t _pin_shutdown; ///< Power down pin
     MD_AD9833 ad;
 
     void powerdown();
     void powerup();
 
-public:
-
-    AD9833(): ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync){}
-    ~AD9833()=default;
+  public:
+    AD9833() : ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync)
+    {
+    }
+    ~AD9833() = default;
 
     err_code_t setup() override;
     void set_vario(float vario) override;
@@ -37,4 +38,3 @@ public:
 //------------------------------------------------------------------------------
 
 #endif /* AD9833_H */
-
