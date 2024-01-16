@@ -4,8 +4,8 @@
  *  @author Cooked by Vicente A. (TT)
  */
 
-#ifndef BUTTON_HANDLER_H
-#define BUTTON_HANDLER_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 //---[ Includes: ]--------------------------------------------------------------
 
@@ -30,7 +30,7 @@ enum eEvent
 
 //------------------------------------------------------------------------------
 
-class CButtonHandler
+class CfipButtonV1
 {
   protected:
     boolean _was_pressed;      // previous state
@@ -41,8 +41,8 @@ class CButtonHandler
     long _lastLoopTime;
 
   public:
-    explicit CButtonHandler(int pin, int long_press_len = DEFAULT_LONG_PRESS_LEN);
-    ~CButtonHandler() = default;
+    explicit CfipButtonV1(int pin, int long_press_len = DEFAULT_LONG_PRESS_LEN);
+    ~CfipButtonV1() = default;
 
     // Initialization done after construction, to permit static instances
     void init();
@@ -54,15 +54,15 @@ class CButtonHandler
 //------------------------------------------------------------------------------
 // http://hackaday.com/2015/12/10/embed-with-elliot-debounce-your-noisy-buttons-part-ii/
 
-class CTheUltimateDebouncer
+class CfibButtonV2
 {
   protected:
     uint8_t _button_history;
     const uint8_t _pin; // pin to which button is connected
 
   public:
-    explicit CTheUltimateDebouncer(uint8_t pin);
-    ~CTheUltimateDebouncer() = default;
+    explicit CfibButtonV2(uint8_t pin);
+    ~CfibButtonV2() = default;
 
     uint8_t is_pressed();
     uint8_t is_released();
@@ -72,4 +72,4 @@ class CTheUltimateDebouncer
 
 //------------------------------------------------------------------------------
 
-#endif /* BUTTON_HANDLER_H */
+#endif /* BUTTON_H */

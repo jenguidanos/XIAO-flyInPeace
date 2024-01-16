@@ -24,7 +24,7 @@ class CFactorySound
 {
   public:
     virtual ~CFactorySound() = default;
-    static Cfip_sound *create(sound_type_t type);
+    static CfipSound *create(sound_type_t type);
 };
 
 //------------------------------------------------------------------------------

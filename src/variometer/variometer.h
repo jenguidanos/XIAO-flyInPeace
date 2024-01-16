@@ -29,7 +29,7 @@ class CFactoryVariometer
 {
   public:
     virtual ~CFactoryVariometer() = default;
-    static Cfip_vario *create(vario_type_t type, Cfip_barometer &barometer);
+    static CfipVario *create(vario_type_t type, CfipBarometer &barometer);
 };
 
 //------------------------------------------------------------------------------

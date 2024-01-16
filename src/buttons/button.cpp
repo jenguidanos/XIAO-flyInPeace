@@ -12,18 +12,18 @@
 #include "WProgram.h"
 #endif
 
-#include "button_handler.h"
+#include "button.h"
 
 //------------------------------------------------------------------------------
 
-CButtonHandler::CButtonHandler(int p, int lp)
+CfipButtonV1::CfipButtonV1(int p, int lp)
     : _was_pressed(false), _generated_event(false), _pressed_counter(0), _pin(p), _long_press_len(lp), _lastLoopTime(0)
 {
 }
 
 //------------------------------------------------------------------------------
 
-void CButtonHandler::init()
+void CfipButtonV1::init()
 {
     pinMode(_pin, INPUT);
     digitalWrite(_pin, HIGH); // pull-up
@@ -34,7 +34,7 @@ void CButtonHandler::init()
 
 //------------------------------------------------------------------------------
 
-eEvent CButtonHandler::handle()
+eEvent CfipButtonV1::handle()
 {
     eEvent event(EV_NONE);
 
@@ -82,7 +82,7 @@ eEvent CButtonHandler::handle()
 
 //------------------------------------------------------------------------------
 
-CTheUltimateDebouncer::CTheUltimateDebouncer(uint8_t p) : _button_history(0x00), _pin(p)
+CfibButtonV2::CfibButtonV2(uint8_t p) : _button_history(0x00), _pin(p)
 {
     pinMode(_pin, INPUT);
     digitalWrite(_pin, HIGH); // pull-up
@@ -90,7 +90,7 @@ CTheUltimateDebouncer::CTheUltimateDebouncer(uint8_t p) : _button_history(0x00),
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_pressed()
+uint8_t CfibButtonV2::is_pressed()
 {
     _button_history = _button_history << 1;
     _button_history |= digitalRead(_pin);
@@ -104,7 +104,7 @@ uint8_t CTheUltimateDebouncer::is_pressed()
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_released()
+uint8_t CfibButtonV2::is_released()
 {
     _button_history = _button_history << 1;
     _button_history |= digitalRead(_pin);
@@ -118,14 +118,14 @@ uint8_t CTheUltimateDebouncer::is_released()
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_down() const
+uint8_t CfibButtonV2::is_down() const
 {
     return (_button_history == B11111111);
 }
 
 //------------------------------------------------------------------------------
 
-uint8_t CTheUltimateDebouncer::is_up() const
+uint8_t CfibButtonV2::is_up() const
 {
     return (_button_history == B00000000);
 }

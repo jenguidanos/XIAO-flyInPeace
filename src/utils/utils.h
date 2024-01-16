@@ -12,7 +12,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CMovAvg : public Cfip_obj
+class CMovAvg : public CfipObj
 {
   private:
     float *_buffer;

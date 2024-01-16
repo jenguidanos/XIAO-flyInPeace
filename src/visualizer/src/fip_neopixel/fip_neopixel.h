@@ -12,7 +12,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CfipNeopixel : public Cfip_visualizer
+class CfipNeopixel : public CfipVisualizer
 {
   private:
     uint8_t num_of_pixels;

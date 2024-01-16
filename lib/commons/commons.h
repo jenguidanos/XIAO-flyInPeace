@@ -24,11 +24,11 @@ typedef enum err_code_e
     ERR_CODE_MAX_NUM
 } err_code_t;
 
-class Cfip_obj
+class CfipObj
 {
   public:
-    Cfip_obj() = default;
-    virtual ~Cfip_obj() = default;
+    CfipObj() = default;
+    virtual ~CfipObj() = default;
 
     virtual void update(){};
     virtual err_code_t setup()
@@ -37,11 +37,11 @@ class Cfip_obj
     }
 };
 
-class Cfip_barometer : public Cfip_obj
+class CfipBarometer : public CfipObj
 {
   public:
-    Cfip_barometer() = default;
-    virtual ~Cfip_barometer() = default;
+    CfipBarometer() = default;
+    virtual ~CfipBarometer() = default;
 
     virtual float get_pressure() const
     {
@@ -56,7 +56,7 @@ class Cfip_barometer : public Cfip_obj
     }
 };
 
-class Cfip_vario : public Cfip_barometer
+class CfipVario : public CfipBarometer
 {
   public:
     virtual void set_altitude(float altitude){};
@@ -70,13 +70,13 @@ class Cfip_vario : public Cfip_barometer
     }
 };
 
-class Cfip_sound : public Cfip_obj
+class CfipSound : public CfipObj
 {
   public:
     virtual void set_vario(float vario){};
 };
 
-class Cfip_visualizer : public Cfip_obj
+class CfipVisualizer : public CfipObj
 {
   public:
     virtual void set_vario(float vario){};

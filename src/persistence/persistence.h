@@ -11,11 +11,11 @@
 
 //---[ Methods: ]-------------------------------------------------------------
 
-class Cpersistence
+class CfipPersistence
 {
   public:
-    Cpersistence() = default;
-    ~Cpersistence() = default;
+    CfipPersistence() = default;
+    ~CfipPersistence() = default;
 
     void setup();
 
@@ -23,7 +23,7 @@ class Cpersistence
     template <class T> int read(int ee, T &target);
 };
 
-template <class T> int Cpersistence::read(int ee, T &target)
+template <class T> int CfipPersistence::read(int ee, T &target)
 {
     byte *p = (byte *)(void *)&target;
     unsigned int i;
@@ -34,7 +34,7 @@ template <class T> int Cpersistence::read(int ee, T &target)
     return i;
 }
 
-template <class T> int Cpersistence::write(int ee, const T &target)
+template <class T> int CfipPersistence::write(int ee, const T &target)
 {
     const byte *p = (const byte *)(const void *)&target;
     unsigned int i;

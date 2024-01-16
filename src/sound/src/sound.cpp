@@ -10,11 +10,11 @@
 
 //------------------------------------------------------------------------------
 
-Cfip_sound *CFactorySound::create(sound_type_t type)
+CfipSound *CFactorySound::create(sound_type_t type)
 {
     if (SOUND_TYPE_AD9833 == type)
-        return new AD9833();
-    return new Cfip_sound();
+        return new CSoundAD9833();
+    return new CfipSound();
 }
 
 //------------------------------------------------------------------------------

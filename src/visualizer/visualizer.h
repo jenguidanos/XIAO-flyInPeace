@@ -26,7 +26,7 @@ class CFactoryVisualizer
 {
   public:
     virtual ~CFactoryVisualizer() = default;
-    static Cfip_visualizer *create(visualizer_type_t type);
+    static CfipVisualizer *create(visualizer_type_t type);
 };
 
 //------------------------------------------------------------------------------

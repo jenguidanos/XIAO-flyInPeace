@@ -11,7 +11,7 @@
 #include "WProgram.h"
 #endif
 
-#include "fipneopixel.h"
+#include "fip_neopixel.h"
 
 //------------------------------------------------------------------------------
 

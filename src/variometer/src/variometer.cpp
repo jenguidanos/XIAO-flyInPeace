@@ -10,11 +10,11 @@
 
 //------------------------------------------------------------------------------
 
-Cfip_vario *CFactoryVariometer::create(vario_type_t type, Cfip_barometer &barometer)
+CfipVario *CFactoryVariometer::create(vario_type_t type, CfipBarometer &barometer)
 {
     if (VARIO_TYPE_V1 == type)
-        return new CVario_v1(barometer);
-    return new Cfip_vario();
+        return new CVarioV1(barometer);
+    return new CfipVario();
 }
 
 //------------------------------------------------------------------------------

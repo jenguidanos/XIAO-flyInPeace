@@ -13,7 +13,7 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class AD9833 : public Cfip_sound
+class CSoundAD9833 : public CfipSound
 {
   private:
     static const uint8_t _pin_data;     ///< SPI Data pin number
@@ -26,10 +26,10 @@ class AD9833 : public Cfip_sound
     void powerup();
 
   public:
-    AD9833() : ad(AD9833::_pin_data, AD9833::_pin_clk, AD9833::_pin_fsync)
+    CSoundAD9833() : ad(CSoundAD9833::_pin_data, CSoundAD9833::_pin_clk, CSoundAD9833::_pin_fsync)
     {
     }
-    ~AD9833() = default;
+    ~CSoundAD9833() = default;
 
     err_code_t setup() override;
     void set_vario(float vario) override;

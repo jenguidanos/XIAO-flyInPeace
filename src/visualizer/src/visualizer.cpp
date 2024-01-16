@@ -5,16 +5,16 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-#include "fipneopixel/fipneopixel.h"
+#include "fip_neopixel/fip_neopixel.h"
 #include <visualizer/visualizer.h>
 
 //------------------------------------------------------------------------------
 
-Cfip_visualizer *CFactoryVisualizer::create(visualizer_type_t type)
+CfipVisualizer *CFactoryVisualizer::create(visualizer_type_t type)
 {
     if (BARO_TYPE_SINGLE_NEOPIXEL == type)
         return new CfipNeopixel(1);
-    return new Cfip_visualizer();
+    return new CfipVisualizer();
 }
 
 //------------------------------------------------------------------------------

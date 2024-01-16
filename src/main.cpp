@@ -19,8 +19,8 @@
 
 //---[ Globals: ]---------------------------------------------------------------
 
-static Cfip_vario *variometer{nullptr};
-static Cfip_sound *sound{nullptr};
+static CfipVario *variometer{nullptr};
+static CfipSound *sound{nullptr};
 
 //------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ void setup()
     SERIAL_BEGIN;
 
     // Create barometer
-    Cfip_barometer *barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
+    CfipBarometer *barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
     err_code_t err = barometer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup barometer" : "INFO: Barometer ok");
     if (ERR_CODE_NONE != err)

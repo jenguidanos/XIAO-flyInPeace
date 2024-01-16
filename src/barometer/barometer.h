@@ -26,7 +26,7 @@ class CFactoryBarometer
 {
   public:
     virtual ~CFactoryBarometer() = default;
-    static Cfip_barometer *create(baro_type_t type);
+    static CfipBarometer *create(baro_type_t type);
 };
 
 //------------------------------------------------------------------------------

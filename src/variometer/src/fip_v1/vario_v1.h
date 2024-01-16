@@ -19,15 +19,15 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CVario_v1 : public Cfip_vario
+class CVarioV1 : public CfipVario
 {
   private:
     static const float _termA;
     static const float _termB;
     static const float _termC;
     static const float _millis_in_a_second;
-    Cfip_barometer &_barometer;
-    Cpersistence _persistence;
+    CfipBarometer &_barometer;
+    CfipPersistence _persistence;
     float _altitude;
     float _prev_altitude;
     float _sample_time;
@@ -39,13 +39,13 @@ class CVario_v1 : public Cfip_vario
     SimpleKalmanFilter _varioKalmanFilter;
 
   public:
-    explicit CVario_v1(Cfip_barometer &barometer)
+    explicit CVarioV1(CfipBarometer &barometer)
         : _barometer{barometer}, _altitude{0.0f}, _prev_altitude{0.0f}, _sample_time{0.0f}, _prev_sample_time{0.0f},
           _pressure{0.0f}, _temperature{0.0f}, _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
           _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)}, _vario{CMovAvg(MOV_AVG_SAMPLE_NUMBER)}
     {
     }
-    ~CVario_v1()
+    ~CVarioV1()
     {
     }
 

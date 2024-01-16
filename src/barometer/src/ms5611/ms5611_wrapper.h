@@ -13,14 +13,14 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
-class CMS5611 : public Cfip_barometer
+class CBarometerMS5611 : public CfipBarometer
 {
   private:
     MS5611 baro;
 
   public:
-    CMS5611();
-    ~CMS5611() = default;
+    CBarometerMS5611();
+    ~CBarometerMS5611() = default;
 
     err_code_t setup() override;
     void update() override;

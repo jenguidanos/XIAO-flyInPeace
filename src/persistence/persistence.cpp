@@ -11,7 +11,7 @@
 
 //------------------------------------------------------------------------------
 
-void Cpersistence::setup()
+void CfipPersistence::setup()
 {
     EEPROM.begin(PERSISTENCE_STORAGE_SIZE);
 }
