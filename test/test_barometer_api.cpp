@@ -1,4 +1,4 @@
-#include <barometer/barometer_api.h>
+#include <barometer/barometer.h>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
