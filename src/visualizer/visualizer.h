@@ -16,10 +16,10 @@
 
 typedef enum visualizer_type_e
 {
-    BARO_TYPE_UNKNOWN,
-    BARO_TYPE_SINGLE_NEOPIXEL,
+    VISUALIZER_TYPE_UNKNOWN,
+    VISUALIZER_TYPE_SINGLE_NEOPIXEL,
 
-    BARO_TYPE_MAX_NUM
+    VISUALIZER_TYPE_MAX_NUM
 } visualizer_type_t;
 
 class CFactoryVisualizer

@@ -8,6 +8,7 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
+#include <Adafruit_NeoPixel.h>
 #include <commons.h>
 
 //---[ Typedefs: ]--------------------------------------------------------------
@@ -15,15 +16,15 @@
 class CfipNeopixel : public CfipVisualizer
 {
   private:
-    uint8_t num_of_pixels;
+    Adafruit_NeoPixel strip;
 
   public:
-    CfipNeopixel() : CfipNeopixel(1)
-    {
-    }
-    CfipNeopixel(uint8_t num_of_pixels);
+    CfipNeopixel(uint8_t pin);
+    CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
     ~CfipNeopixel() = default;
 
+    err_code_t setup() override;
+    void update() override;
     void set_vario(float vario) override;
 };
 

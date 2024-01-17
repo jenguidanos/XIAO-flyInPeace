@@ -16,11 +16,13 @@
 #include <commons.h>
 #include <sound/sound.h>
 #include <variometer/variometer.h>
+#include <visualizer/visualizer.h>
 
 //---[ Globals: ]---------------------------------------------------------------
 
 static CfipVario *variometer{nullptr};
 static CfipSound *sound{nullptr};
+static CfipVisualizer *visualizer{nullptr};
 
 //------------------------------------------------------------------------------
 
@@ -41,19 +43,39 @@ void setup()
     err = variometer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup variometer" : "INFO: Variometer ok");
 
+    if (ERR_CODE_NONE != err)
+    {
+        while (true)
+            ;
+    }
+
     sound = CFactorySound::create(SOUND_TYPE_AD9833);
     err = sound->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup sound" : "INFO: sound ok");
 
     if (ERR_CODE_NONE != err)
+    {
         while (true)
             ;
+    }
+
+    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_SINGLE_NEOPIXEL);
+    err = visualizer->setup();
+    SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup visualizer" : "INFO: visualizer ok");
+
+    if (ERR_CODE_NONE != err)
+    {
+        while (true)
+            ;
+    }
 }
 
 void loop()
 {
     variometer->update();
-    sound->set_vario(variometer->get_vario());
+    float vario = variometer->get_vario();
+    sound->set_vario(vario);
+    visualizer->set_vario(vario);
 
     std::stringstream ss;
     variometer->print(ss);

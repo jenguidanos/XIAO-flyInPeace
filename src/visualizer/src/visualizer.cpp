@@ -12,7 +12,7 @@
 
 CfipVisualizer *CFactoryVisualizer::create(visualizer_type_t type)
 {
-    if (BARO_TYPE_SINGLE_NEOPIXEL == type)
+    if (VISUALIZER_TYPE_SINGLE_NEOPIXEL == type)
         return new CfipNeopixel(1);
     return new CfipVisualizer();
 }
