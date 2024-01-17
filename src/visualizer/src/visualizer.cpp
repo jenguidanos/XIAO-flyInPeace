@@ -10,10 +10,12 @@
 
 //------------------------------------------------------------------------------
 
-CfipVisualizer *CFactoryVisualizer::create(visualizer_type_t type)
+CfipVisualizer *CFactoryVisualizer::create(visualizer_type_t type, uint8_t pin)
 {
-    if (VISUALIZER_TYPE_SINGLE_NEOPIXEL == type)
-        return new CfipNeopixel(1);
+    if (VISUALIZER_TYPE_NEOPIXEL_SINGLE == type)
+        return new CfipNeopixel(pin, 1);
+    if (VISUALIZER_TYPE_NEOPIXEL_WHEEL12 == type)
+        return new CfipNeopixel(pin, 12);
     return new CfipVisualizer();
 }
 

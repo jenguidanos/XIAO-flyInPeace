@@ -30,6 +30,23 @@
 #define SERIAL_PRINT(a)
 #endif
 
+//---[ Pin assignement: ]--------------------------------------------------------
+
+/**
+ * Strip pin assignment
+ */
+const uint8_t STRIP_PIN(D0);
+
+/**
+ * Button0 pin assignment
+ */
+const uint8_t BUTTON_PIN0(8);
+
+/**
+ * Button1 pin assignment
+ */
+const uint8_t BUTTON_PIN1(7);
+
 //-----------------------------------------------------------------------------
 
 #endif /* CONFIG_H */

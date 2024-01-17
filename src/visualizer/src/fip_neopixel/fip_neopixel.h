@@ -18,8 +18,10 @@ class CfipNeopixel : public CfipVisualizer
   private:
     Adafruit_NeoPixel strip;
 
+  private:
+    uint32_t wheel(byte wheelPos);
+
   public:
-    CfipNeopixel(uint8_t pin);
     CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
     ~CfipNeopixel() = default;
 

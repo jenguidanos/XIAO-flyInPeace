@@ -59,7 +59,7 @@ void setup()
             ;
     }
 
-    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_SINGLE_NEOPIXEL);
+    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_SINGLE_NEOPIXEL, STRIP_PIN);
     err = visualizer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup visualizer" : "INFO: visualizer ok");
 
