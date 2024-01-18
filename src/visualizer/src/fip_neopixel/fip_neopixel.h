@@ -18,6 +18,8 @@ class CfipNeopixel : public CfipVisualizer
   private:
     Adafruit_NeoPixel strip;
     uint16_t hue;
+    float max_vario;
+    float min_vario;
 
   public:
     CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
@@ -27,6 +29,14 @@ class CfipNeopixel : public CfipVisualizer
     void update() override;
     void set_vario(float vario) override;
     void print(std::stringstream &ss) const override;
+    void setMax(float max)
+    {
+        max_vario = max;
+    }
+    void setMin(float min)
+    {
+        min_vario = min;
+    }
 };
 
 //------------------------------------------------------------------------------
