@@ -35,7 +35,7 @@
 /**
  * Strip pin assignment
  */
-const uint8_t STRIP_PIN(D0);
+const uint8_t STRIP_PIN(D3);
 
 /**
  * Button0 pin assignment

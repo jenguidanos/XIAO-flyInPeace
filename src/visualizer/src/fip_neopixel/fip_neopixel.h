@@ -17,9 +17,7 @@ class CfipNeopixel : public CfipVisualizer
 {
   private:
     Adafruit_NeoPixel strip;
-
-  private:
-    uint32_t wheel(byte wheelPos);
+    uint16_t hue;
 
   public:
     CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
@@ -28,6 +26,7 @@ class CfipNeopixel : public CfipVisualizer
     err_code_t setup() override;
     void update() override;
     void set_vario(float vario) override;
+    void print(std::stringstream &ss) const override;
 };
 
 //------------------------------------------------------------------------------

@@ -23,6 +23,7 @@
 static CfipVario *variometer{nullptr};
 static CfipSound *sound{nullptr};
 static CfipVisualizer *visualizer{nullptr};
+static CfipBarometer *barometer{nullptr};
 
 //------------------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ void setup()
     SERIAL_BEGIN;
 
     // Create barometer
-    CfipBarometer *barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
+    barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
     err_code_t err = barometer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup barometer" : "INFO: Barometer ok");
     if (ERR_CODE_NONE != err)
@@ -59,7 +60,7 @@ void setup()
             ;
     }
 
-    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_SINGLE_NEOPIXEL, STRIP_PIN);
+    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_NEOPIXEL_SINGLE, STRIP_PIN);
     err = visualizer->setup();
     SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup visualizer" : "INFO: visualizer ok");
 
@@ -78,7 +79,9 @@ void loop()
     visualizer->set_vario(vario);
 
     std::stringstream ss;
+    barometer->print(ss);
     variometer->print(ss);
+    visualizer->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 }
 

@@ -35,6 +35,9 @@ class CfipObj
     {
         return ERR_CODE_SETUP;
     }
+    virtual void print(std::stringstream &ss) const
+    {
+    }
 };
 
 class CfipBarometer : public CfipObj
@@ -50,9 +53,6 @@ class CfipBarometer : public CfipObj
     virtual float get_temperature() const
     {
         return 0.0f;
-    }
-    virtual void print(std::stringstream &ss) const
-    {
     }
 };
 

@@ -12,6 +12,7 @@
 #endif
 
 #include "fip_neopixel.h"
+#include <iomanip>
 
 //------------------------------------------------------------------------------
 
@@ -22,8 +23,7 @@ CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels) : strip(num_of_pi
 err_code_t CfipNeopixel::setup()
 {
     strip.begin();
-    strip.setBrightness(50);
-    strip.clear(); 
+    strip.clear();
     return ERR_CODE_NONE;
 }
 
@@ -34,34 +34,30 @@ void CfipNeopixel::update()
 
 void CfipNeopixel::set_vario(float vario)
 {
-    //for (uint16_t i=0; i < strip.numPixels(); i++) {
-        //strip.setPixelColor(1, strip.Color(127, 127, 127));    //turn every third pixel on
-    //}
-    for(uint16_t j=0; j<256; j++) 
+    if (vario < 0.2f)
+        vario = 0.0f;
+    if (vario > 5.0f)
+        vario = 5.0f;
+    hue = (uint16_t)(vario * 65536.0f / 5.0f);
+
+    uint32_t color = 0;
+
+    if (hue)
     {
-        for(uint16_t i=0; i<strip.numPixels(); i++) 
-        {
-        strip.setPixelColor(i, wheel((i+j) & 255));
-        }
+        color = strip.ColorHSV(hue, 255, 255);
+        color = strip.gamma32(color);
     }
+
+    strip.fill(color, 0, strip.numPixels());
+
     update();
-    delay(50);
 }
 
-uint32_t CfipNeopixel::wheel(byte wheelPos) {
-  wheelPos = 255 - wheelPos;
-  if(wheelPos < 85) {
-    return strip.Color(255 - wheelPos * 3, 0, wheelPos * 3);
-  }
-  if(wheelPos < 170) {
-    wheelPos -= 85;
-    return strip.Color(0, wheelPos * 3, 255 - wheelPos * 3);
-  }
-  wheelPos -= 170;
-  return strip.Color(wheelPos * 3, 255 - wheelPos * 3, 0);
+void CfipNeopixel::print(std::stringstream &ss) const
+{
+    ss << " hue: " << std::setw(5) << std::fixed << std::setprecision(1) << hue;
 }
 
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
-
