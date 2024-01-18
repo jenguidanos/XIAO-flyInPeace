@@ -21,6 +21,9 @@ class CfipNeopixel : public CfipVisualizer
     float max_vario;
     float min_vario;
 
+  private:
+    uint16_t palette(float vario);
+
   public:
     CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
     ~CfipNeopixel() = default;

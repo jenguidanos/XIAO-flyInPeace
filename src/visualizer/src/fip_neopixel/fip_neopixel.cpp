@@ -35,28 +35,24 @@ void CfipNeopixel::update()
 
 void CfipNeopixel::set_vario(float vario)
 {
-    if (vario < min_vario)
-    {
-        hue = 0;
-        strip.fill(0, 0, strip.numPixels());
-        return;
-    }
+    hue = palette(vario);
 
-    if (vario > max_vario)
-        vario = max_vario;
-    hue = (uint16_t)(vario * 65536.0f / max_vario);
-
-    uint32_t color = 0;
-
-    if (hue)
-    {
-        color = strip.ColorHSV(hue, 255, 255);
-        color = strip.gamma32(color);
-    }
+    uint32_t color = hue ? strip.gamma32(strip.ColorHSV(hue, 255, 255)) : 0;
 
     strip.fill(color, 0, strip.numPixels());
 
     update();
+}
+
+uint16_t CfipNeopixel::palette(float vario)
+{
+    if (vario < min_vario)
+        return 0;
+
+    if (vario > max_vario)
+        vario = max_vario;
+
+    return (uint16_t)(vario * 65536.0f / max_vario);
 }
 
 void CfipNeopixel::print(std::stringstream &ss) const
