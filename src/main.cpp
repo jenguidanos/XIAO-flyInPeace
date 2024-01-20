@@ -62,39 +62,16 @@ static void initialize_fip_object(CfipObj* obj)
 
 void loop()
 {
-    // variometer->update();
-    // float vario = variometer->get_vario();
-    // sound->set_vario(vario);
-    float vario = 1.0f;
+    variometer->update();
+    float vario = variometer->get_vario();
+    sound->set_vario(vario);
     visualizer->set_vario(vario);
 
-    delay(500);
-
-    vario = 2.0f;
-    visualizer->set_vario(vario);
-
-    delay(500);
-
-    vario = 3.0f;
-    visualizer->set_vario(vario);
-
-    delay(500);
-
-    vario = 4.0f;
-    visualizer->set_vario(vario);
-
-    delay(500);
-
-    vario = 5.0f;
-    visualizer->set_vario(vario);
-
-    delay(500);
-
-    // std::stringstream ss;
-    //  barometer->print(ss);
-    //  variometer->print(ss);
-    // visualizer->print(ss);
-    // SERIAL_PRINTLN(ss.str().c_str());
+    std::stringstream ss;
+    barometer->print(ss);
+    variometer->print(ss);
+    visualizer->print(ss);
+    SERIAL_PRINTLN(ss.str().c_str());
 }
 
 //------------------------------------------------------------------------------

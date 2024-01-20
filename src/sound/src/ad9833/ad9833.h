@@ -18,7 +18,7 @@ class CSoundAD9833 : public CfipSound
   private:
     static const uint8_t _pin_data;     ///< SPI Data pin number
     static const uint8_t _pin_clk;      ///< SPI Clock pin number
-    static const uint8_t _pin_fsync;    ///< SPI Load pin number (FSYNC in AD9833 usage)
+    static const uint8_t _pin_cs;       ///< SPI Load pin number (FSYNC in AD9833 usage)
     static const uint8_t _pin_shutdown; ///< Power down pin
     MD_AD9833 ad;
 
@@ -26,7 +26,7 @@ class CSoundAD9833 : public CfipSound
     void powerup();
 
   public:
-    CSoundAD9833() : ad(CSoundAD9833::_pin_data, CSoundAD9833::_pin_clk, CSoundAD9833::_pin_fsync)
+    CSoundAD9833() : ad(CSoundAD9833::_pin_data, CSoundAD9833::_pin_clk, CSoundAD9833::_pin_cs)
     {
     }
     ~CSoundAD9833() = default;
