@@ -30,6 +30,7 @@ class CfipObj
     CfipObj() = default;
     virtual ~CfipObj() = default;
 
+    virtual const char* objType(){return "CfipObj";};
     virtual void update(){};
     virtual err_code_t setup()
     {
@@ -46,6 +47,7 @@ class CfipBarometer : public CfipObj
     CfipBarometer() = default;
     virtual ~CfipBarometer() = default;
 
+    const char* objType() override {return "CfipBarometer";};
     virtual float get_pressure() const
     {
         return 0.0f;
@@ -59,6 +61,7 @@ class CfipBarometer : public CfipObj
 class CfipVario : public CfipBarometer
 {
   public:
+    const char* objType() override {return "CfipVario";};
     virtual void set_altitude(float altitude){};
     virtual float get_altitude() const
     {
@@ -73,12 +76,14 @@ class CfipVario : public CfipBarometer
 class CfipSound : public CfipObj
 {
   public:
+    const char* objType() override {return "CfipSound";};
     virtual void set_vario(float vario){};
 };
 
 class CfipVisualizer : public CfipObj
 {
   public:
+    const char* objType() override {return "CfipVisualizer";};
     virtual void set_vario(float vario){};
 };
 

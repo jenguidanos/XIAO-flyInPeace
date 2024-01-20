@@ -19,7 +19,7 @@ class CBarometerMS5611 : public CfipBarometer
     MS5611 baro;
 
   public:
-    CBarometerMS5611();
+    CBarometerMS5611() = default;
     ~CBarometerMS5611() = default;
 
     err_code_t setup() override;

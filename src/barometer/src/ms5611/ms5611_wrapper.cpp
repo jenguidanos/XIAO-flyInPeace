@@ -12,18 +12,12 @@
 #endif
 
 #include "ms5611_wrapper.h"
-#include <Wire.h>
 #include <iomanip>
 
 //------------------------------------------------------------------------------
 
-CBarometerMS5611::CBarometerMS5611() : baro{0x77}
-{
-}
-
 err_code_t CBarometerMS5611::setup()
 {
-    Wire.begin();
     baro.setOversampling(OSR_ULTRA_HIGH);
     baro.setCompensation(true);
     return baro.begin() ? ERR_CODE_NONE : ERR_CODE_SETUP;

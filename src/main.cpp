@@ -17,6 +17,7 @@
 #include <sound/sound.h>
 #include <variometer/variometer.h>
 #include <visualizer/visualizer.h>
+#include <iomanip>
 
 //---[ Globals: ]---------------------------------------------------------------
 
@@ -25,64 +26,75 @@ static CfipSound *sound{nullptr};
 static CfipVisualizer *visualizer{nullptr};
 static CfipBarometer *barometer{nullptr};
 
+//---[ Declarations: ]----------------------------------------------------------
+
+static void initialize_fip_object(CfipObj* obj);
+
 //------------------------------------------------------------------------------
 
 void setup()
 {
-    // Initialize serial port
     SERIAL_BEGIN;
 
-    // Create barometer
-    barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
-    err_code_t err = barometer->setup();
-    SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup barometer" : "INFO: Barometer ok");
-    if (ERR_CODE_NONE != err)
-        while (true)
-            ;
-
-    variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
-    err = variometer->setup();
-    SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup variometer" : "INFO: Variometer ok");
-
-    if (ERR_CODE_NONE != err)
-    {
-        while (true)
-            ;
-    }
-
     sound = CFactorySound::create(SOUND_TYPE_AD9833);
-    err = sound->setup();
-    SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup sound" : "INFO: sound ok");
-
-    if (ERR_CODE_NONE != err)
-    {
-        while (true)
-            ;
-    }
+    initialize_fip_object(sound);
 
     visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_NEOPIXEL_SINGLE, STRIP_PIN);
-    err = visualizer->setup();
-    SERIAL_PRINTLN(ERR_CODE_NONE != err ? "ERROR: Unable to setup visualizer" : "INFO: visualizer ok");
+    initialize_fip_object(visualizer);
 
-    if (ERR_CODE_NONE != err)
+    barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
+    initialize_fip_object(barometer);
+
+    variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
+    initialize_fip_object(variometer);
+}
+
+static void initialize_fip_object(CfipObj* obj)
+{
+    std::stringstream ss;
+    ss << " Initializing " << std::string(obj->objType()) << " ...";
+    do
     {
-        while (true)
-            ;
-    }
+        SERIAL_PRINTLN(ss.str().c_str());
+        delay(100);
+    } while (ERR_CODE_NONE != obj->setup());
 }
 
 void loop()
 {
-    variometer->update();
-    float vario = variometer->get_vario();
-    sound->set_vario(vario);
+    // variometer->update();
+    // float vario = variometer->get_vario();
+    // sound->set_vario(vario);
+    float vario = 1.0f;
     visualizer->set_vario(vario);
 
-    std::stringstream ss;
-    barometer->print(ss);
-    variometer->print(ss);
-    visualizer->print(ss);
-    SERIAL_PRINTLN(ss.str().c_str());
+    delay(500);
+
+    vario = 2.0f;
+    visualizer->set_vario(vario);
+
+    delay(500);
+
+    vario = 3.0f;
+    visualizer->set_vario(vario);
+
+    delay(500);
+
+    vario = 4.0f;
+    visualizer->set_vario(vario);
+
+    delay(500);
+
+    vario = 5.0f;
+    visualizer->set_vario(vario);
+
+    delay(500);
+
+    // std::stringstream ss;
+    //  barometer->print(ss);
+    //  variometer->print(ss);
+    // visualizer->print(ss);
+    // SERIAL_PRINTLN(ss.str().c_str());
 }
 
 //------------------------------------------------------------------------------

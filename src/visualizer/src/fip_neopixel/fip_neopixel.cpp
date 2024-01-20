@@ -24,7 +24,7 @@ CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels)
 err_code_t CfipNeopixel::setup()
 {
     strip.begin();
-    strip.clear();
+    strip.fill(0, 0, strip.numPixels());
     return ERR_CODE_NONE;
 }
 
