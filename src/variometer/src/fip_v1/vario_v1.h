@@ -15,6 +15,9 @@
 
 //---[ Define: ]----------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 #define MOV_AVG_SAMPLE_NUMBER 16
 
 //---[ Typedefs: ]--------------------------------------------------------------
@@ -40,8 +43,8 @@ class CVarioV1 : public CfipVario
 
   public:
     explicit CVarioV1(CfipBarometer &barometer)
-        : _barometer{barometer}, _altitude{0.0f}, _prev_altitude{0.0f}, _sample_time{0.0f}, _prev_sample_time{0.0f},
-          _pressure{0.0f}, _temperature{0.0f}, _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
+        : _barometer{barometer}, _altitude{0.0f}, _prev_altitude{0.0f}, _sample_time{0.0f},
+          _prev_sample_time{0.0f}, _pressure{0.0f}, _temperature{0.0f}, _sea_level_pressure{DEFAULT_SEA_LEVEL_PRESSURE},
           _varioKalmanFilter{SimpleKalmanFilter(1, 1, 0.01)}, _vario{CMovAvg(MOV_AVG_SAMPLE_NUMBER)}
     {
     }
@@ -74,6 +77,8 @@ class CVarioV1 : public CfipVario
   private:
     float calculate_vario();
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

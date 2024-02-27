@@ -14,6 +14,8 @@
 #include "fip_neopixel.h"
 #include <iomanip>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels)

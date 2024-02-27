@@ -8,6 +8,8 @@
 #include "ad9833.h"
 #include <SPI.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 const uint8_t CSoundAD9833::_pin_data = D10;    ///< SPI Data pin number
@@ -33,7 +35,7 @@ void CSoundAD9833::set_vario(float vario)
 
 void CSoundAD9833::powerdown(void)
 {
-    digitalWrite(CSoundAD9833::_pin_shutdown, HIGH); //Should be low to powerdown
+    digitalWrite(CSoundAD9833::_pin_shutdown, HIGH); // Should be low to powerdown
 }
 
 void CSoundAD9833::powerup(void)

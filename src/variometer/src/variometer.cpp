@@ -8,6 +8,8 @@
 #include "../variometer.h"
 #include "variometer/src/fip_v1/vario_v1.h"
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipVario *CFactoryVariometer::create(vario_type_t type, CfipBarometer &barometer)

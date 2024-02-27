@@ -13,6 +13,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 class CfipNeopixel : public CfipVisualizer
 {
   private:
@@ -41,6 +44,8 @@ class CfipNeopixel : public CfipVisualizer
         min_vario = min;
     }
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

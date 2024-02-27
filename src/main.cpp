@@ -14,10 +14,12 @@
 #include "config.h"
 #include <barometer/barometer.h>
 #include <commons.h>
+#include <iomanip>
 #include <sound/sound.h>
 #include <variometer/variometer.h>
 #include <visualizer/visualizer.h>
-#include <iomanip>
+
+using namespace vaf::fip;
 
 //---[ Globals: ]---------------------------------------------------------------
 
@@ -28,7 +30,7 @@ static CfipBarometer *barometer{nullptr};
 
 //---[ Declarations: ]----------------------------------------------------------
 
-static void initialize_fip_object(CfipObj* obj);
+static void initialize_fip_object(CfipObj *obj);
 
 //------------------------------------------------------------------------------
 
@@ -49,7 +51,7 @@ void setup()
     initialize_fip_object(variometer);
 }
 
-static void initialize_fip_object(CfipObj* obj)
+static void initialize_fip_object(CfipObj *obj)
 {
     std::stringstream ss;
     ss << " Initializing " << std::string(obj->objType()) << " ...";

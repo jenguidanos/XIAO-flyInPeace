@@ -12,6 +12,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 typedef enum sound_type_e
 {
     SOUND_TYPE_UNKNOWN,
@@ -26,6 +29,8 @@ class CFactorySound
     virtual ~CFactorySound() = default;
     static CfipSound *create(sound_type_t type);
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

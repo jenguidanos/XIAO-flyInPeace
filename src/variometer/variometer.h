@@ -17,6 +17,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 typedef enum vario_type_e
 {
     VARIO_TYPE_UNKNOWN,
@@ -31,6 +34,8 @@ class CFactoryVariometer
     virtual ~CFactoryVariometer() = default;
     static CfipVario *create(vario_type_t type, CfipBarometer &barometer);
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

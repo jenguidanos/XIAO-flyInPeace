@@ -8,6 +8,8 @@
 #include "ms5611/ms5611_wrapper.h"
 #include <barometer/barometer.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipBarometer *CFactoryBarometer::create(baro_type_t type)

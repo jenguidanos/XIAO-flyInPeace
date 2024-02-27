@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <persistence/persistence.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 err_code_t CVarioV1::setup()

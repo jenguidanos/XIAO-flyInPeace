@@ -14,6 +14,8 @@
 
 #include "button.h"
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipButtonV1::CfipButtonV1(int p, int lp)

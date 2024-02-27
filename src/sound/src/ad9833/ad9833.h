@@ -13,6 +13,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 class CSoundAD9833 : public CfipSound
 {
   private:
@@ -34,6 +37,8 @@ class CSoundAD9833 : public CfipSound
     err_code_t setup() override;
     void set_vario(float vario) override;
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

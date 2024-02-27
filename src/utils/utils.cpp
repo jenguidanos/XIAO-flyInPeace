@@ -8,6 +8,8 @@
 #include "utils.h"
 #include <cmath>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 err_code_t CMovAvg::setup()

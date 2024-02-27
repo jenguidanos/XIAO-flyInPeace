@@ -14,6 +14,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 typedef enum visualizer_type_e
 {
     VISUALIZER_TYPE_UNKNOWN,
@@ -30,6 +33,8 @@ class CFactoryVisualizer
     virtual ~CFactoryVisualizer() = default;
     static CfipVisualizer *create(visualizer_type_t type, uint8_t pin);
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

@@ -9,6 +9,9 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -69,6 +72,8 @@ class CfibButtonV2
     uint8_t is_down() const;
     uint8_t is_up() const;
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

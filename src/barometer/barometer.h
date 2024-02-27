@@ -14,6 +14,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 typedef enum baro_type_e
 {
     BARO_TYPE_UNKNOWN,
@@ -28,6 +31,8 @@ class CFactoryBarometer
     virtual ~CFactoryBarometer() = default;
     static CfipBarometer *create(baro_type_t type);
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

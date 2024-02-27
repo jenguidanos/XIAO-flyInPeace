@@ -8,6 +8,8 @@
 #include "fip_neopixel/fip_neopixel.h"
 #include <visualizer/visualizer.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipVisualizer *CFactoryVisualizer::create(visualizer_type_t type, uint8_t pin)
