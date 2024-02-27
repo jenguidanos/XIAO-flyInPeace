@@ -38,6 +38,7 @@ class CfipObj
         return "CfipObj";
     };
     virtual void update(){};
+    virtual void update(float value){};
     virtual err_code_t setup()
     {
         return ERR_CODE_SETUP;
@@ -70,6 +71,7 @@ class CfipBarometer : public CfipObj
 class CfipVario : public CfipBarometer
 {
   public:
+    virtual ~CfipVario() = default;
     const char *objType() override
     {
         return "CfipVario";
@@ -79,7 +81,11 @@ class CfipVario : public CfipBarometer
     {
         return 0.0f;
     }
-    virtual float get_vario() const
+    virtual float get() const
+    {
+        return 0.0f;
+    }
+    virtual float get_norm() const
     {
         return 0.0f;
     }
@@ -88,6 +94,7 @@ class CfipVario : public CfipBarometer
 class CfipSound : public CfipObj
 {
   public:
+    virtual ~CfipSound() = default;
     const char *objType() override
     {
         return "CfipSound";
@@ -98,11 +105,26 @@ class CfipSound : public CfipObj
 class CfipVisualizer : public CfipObj
 {
   public:
+    virtual ~CfipVisualizer() = default;
     const char *objType() override
     {
         return "CfipVisualizer";
     };
     virtual void set_vario(float vario){};
+};
+
+class CfipCurve : public CfipObj
+{
+  public:
+    virtual ~CfipCurve() = default;
+    const char *objType() override
+    {
+        return "CfipCurve";
+    };
+    virtual float get() const
+    {
+        return 0.0f;
+    };
 };
 
 } // namespace vaf::fip

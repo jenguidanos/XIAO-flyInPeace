@@ -68,7 +68,7 @@ class CVarioV1 : public CfipVario
     {
         return _altitude;
     };
-    float get_vario() const override
+    float get() const override
     {
         return _vario.get();
     };

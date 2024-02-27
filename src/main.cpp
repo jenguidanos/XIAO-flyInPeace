@@ -65,7 +65,7 @@ static void initialize_fip_object(CfipObj *obj)
 void loop()
 {
     variometer->update();
-    float vario = variometer->get_vario();
+    float vario = variometer->get();
     sound->set_vario(vario);
     visualizer->set_vario(vario);
 

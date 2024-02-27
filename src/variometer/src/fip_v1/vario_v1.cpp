@@ -69,7 +69,7 @@ float CVarioV1::calculate_vario()
 void CVarioV1::print(std::stringstream &ss) const
 {
     ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << get_altitude();
-    ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << get_vario();
+    ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << get();
 }
 
 //------------------------------------------------------------------------------
