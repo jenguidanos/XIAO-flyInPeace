@@ -14,52 +14,50 @@
 #include "fip_neopixel.h"
 #include <iomanip>
 
+
 using namespace vaf::fip;
 
 //------------------------------------------------------------------------------
 
 CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels)
-    : strip(num_of_pixels, pin, NEO_GRB + NEO_KHZ800), max_vario{10.0f}, min_vario{0.5f}
+    : strip_(num_of_pixels, pin, NEO_GRB + NEO_KHZ800)
 {
 }
 
 err_code_t CfipNeopixel::setup()
 {
-    strip.begin();
-    strip.fill(0, 0, strip.numPixels());
+    strip_.begin();
+    strip_.fill(0, 0, strip_.numPixels());
     return ERR_CODE_NONE;
 }
 
-void CfipNeopixel::update()
+void CfipNeopixel::update(float value)
 {
-    strip.show();
+    hue_ = palette(value);
+
+    uint32_t color = hue_ ? strip_.gamma32(strip_.ColorHSV(hue_, 255, 255)) : 0;
+
+    strip_.fill(color, 0, strip_.numPixels());
+    strip_.show();
 }
 
-void CfipNeopixel::set_vario(float vario)
+uint16_t CfipNeopixel::palette(float value)
 {
-    hue = palette(vario);
+    static const float max_value = {1.0f};
+    static const float min_value = {0.0f};
 
-    uint32_t color = hue ? strip.gamma32(strip.ColorHSV(hue, 255, 255)) : 0;
-
-    strip.fill(color, 0, strip.numPixels());
-
-    update();
-}
-
-uint16_t CfipNeopixel::palette(float vario)
-{
-    if (vario < min_vario)
+    if (value < min_value)
         return 0;
 
-    if (vario > max_vario)
-        vario = max_vario;
+    if (value > max_value)
+        value = max_value;
 
-    return (uint16_t)(vario * 65536.0f / max_vario);
+    return (uint16_t)(value * 65536.0f / max_value);
 }
 
 void CfipNeopixel::print(std::stringstream &ss) const
 {
-    ss << " hue: " << std::setw(5) << std::fixed << std::setprecision(1) << hue;
+    ss << " hue: " << std::setw(5) << std::fixed << std::setprecision(1) << hue_;
 }
 
 //------------------------------------------------------------------------------

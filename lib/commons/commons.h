@@ -116,7 +116,6 @@ class CfipSound : public CfipObj
     {
         return "CfipSound";
     };
-    virtual void set_vario(float vario){};
 };
 
 class CfipVisualizer : public CfipObj
@@ -127,7 +126,6 @@ class CfipVisualizer : public CfipObj
     {
         return "CfipVisualizer";
     };
-    virtual void set_vario(float vario){};
 };
 
 class CfipCurve : public CfipObj

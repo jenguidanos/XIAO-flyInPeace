@@ -72,8 +72,8 @@ void loop()
     variometer->update();
     curve->update(variometer->get());
     float vario = curve->get();
-    sound->set_vario(vario);
-    visualizer->set_vario(vario);
+    sound->update(vario);
+    visualizer->update(vario);
 
     std::stringstream ss;
     barometer->print(ss);
