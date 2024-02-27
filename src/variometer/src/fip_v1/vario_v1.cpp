@@ -54,6 +54,12 @@ void CVarioV1::set_altitude(float altitude)
     _persistence.write(0, _sea_level_pressure);
 }
 
+float CVarioV1::get_norm() const
+{
+    float value = get() / get_max_value();
+    return value > 1.0f ? 1.0f : value;
+};
+
 float CVarioV1::calculate_vario()
 {
     float h = _altitude - _prev_altitude;
@@ -70,6 +76,7 @@ void CVarioV1::print(std::stringstream &ss) const
 {
     ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << get_altitude();
     ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << get();
+    ss << " Vario_norm: " << std::setw(8) << std::fixed << std::setprecision(3) << get_norm();
 }
 
 //------------------------------------------------------------------------------

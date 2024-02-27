@@ -70,7 +70,24 @@ class CfipBarometer : public CfipObj
 
 class CfipVario : public CfipBarometer
 {
+  private:
+    float max_value_;
+
+  protected:
+    float get_max_value() const
+    {
+        return max_value_;
+    }
+
   public:
+    CfipVario() : max_value_(10.f)
+    {
+    }
+    CfipVario(float max_value) : max_value_(max_value)
+    {
+        if (max_value_ <= 0)
+            max_value_ = 10.0f;
+    }
     virtual ~CfipVario() = default;
     const char *objType() override
     {

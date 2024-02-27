@@ -18,6 +18,7 @@
 #include <sound/sound.h>
 #include <variometer/variometer.h>
 #include <visualizer/visualizer.h>
+#include <curve/curve.h>
 
 using namespace vaf::fip;
 
@@ -27,6 +28,7 @@ static CfipVario *variometer{nullptr};
 static CfipSound *sound{nullptr};
 static CfipVisualizer *visualizer{nullptr};
 static CfipBarometer *barometer{nullptr};
+static CfipCurve *curve{nullptr};
 
 //---[ Declarations: ]----------------------------------------------------------
 
@@ -49,6 +51,9 @@ void setup()
 
     variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
     initialize_fip_object(variometer);
+
+    curve = CFactoryCurve::create(CURVE_TYPE_V1);
+    initialize_fip_object(curve);
 }
 
 static void initialize_fip_object(CfipObj *obj)
@@ -65,7 +70,8 @@ static void initialize_fip_object(CfipObj *obj)
 void loop()
 {
     variometer->update();
-    float vario = variometer->get();
+    curve->update(variometer->get());
+    float vario = curve->get();
     sound->set_vario(vario);
     visualizer->set_vario(vario);
 
@@ -73,6 +79,7 @@ void loop()
     barometer->print(ss);
     variometer->print(ss);
     visualizer->print(ss);
+    curve->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
