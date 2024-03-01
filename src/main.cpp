@@ -44,7 +44,7 @@ void setup()
     sound = CFactorySound::create(SOUND_TYPE_AD9833);
     initialize_fip_object(sound);
 
-    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_NEOPIXEL_SINGLE, STRIP_PIN);
+    visualizer = CFactoryVisualizer::create(VISUALIZER_TYPE_NEOPIXEL_V1, STRIP_PIN);
     initialize_fip_object(visualizer);
 
     barometer = CFactoryBarometer::create(BARO_TYPE_MS5611);
@@ -71,15 +71,19 @@ static void initialize_fip_object(CfipObj *obj)
     } while (ERR_CODE_NONE != obj->setup());
 }
 
+
+float cnt = 0.0f;
 void loop()
 {
-    variometer->update();
-    float vario = variometer->get_norm();
+    //variometer->update();
+    //float vario = variometer->get_norm();
 
-    sound_curve->update(vario);
-    sound->update(sound_curve->get());
+    //sound_curve->update(vario);
+    sound_curve->update(cnt);
+    //sound->update(sound_curve->get());
 
-    visualization_curve->update(vario);
+    //visualization_curve->update(vario);
+    visualization_curve->update(cnt);
     visualizer->update(visualization_curve->get());
 
     std::stringstream ss;
@@ -88,6 +92,10 @@ void loop()
     visualizer->print(ss);
     sound_curve->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
+
+    cnt+=0.1f;
+    if(cnt > 1.0f) cnt = 0.0f;
+    delay(250);
 }
 
 //------------------------------------------------------------------------------

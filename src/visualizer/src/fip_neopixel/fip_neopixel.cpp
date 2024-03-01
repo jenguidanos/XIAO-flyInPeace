@@ -13,6 +13,7 @@
 
 #include "fip_neopixel.h"
 #include <iomanip>
+#include <utils/utils.h>
 
 
 using namespace vaf::fip;
@@ -27,7 +28,8 @@ CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels)
 err_code_t CfipNeopixel::setup()
 {
     strip_.begin();
-    strip_.fill(0, 0, strip_.numPixels());
+    strip_.clear();
+    strip_.show();
     return ERR_CODE_NONE;
 }
 
@@ -44,22 +46,13 @@ void CfipNeopixel::update_(float value, uint16_t first, uint16_t cnt)
 
     uint32_t color = get_hue_() ? strip->gamma32(strip->ColorHSV(get_hue_(), 255, 255)) : 0;
 
-    strip->fill(color, 0, strip->numPixels());
+    strip->fill(color, first, cnt);
     strip->show();
 }
 
 uint16_t CfipNeopixel::palette_(float value)
 {
-    static const float max_value = {1.0f};
-    static const float min_value = {0.0f};
-
-    if (value < min_value)
-        return 0;
-
-    if (value > max_value)
-        value = max_value;
-
-    return (uint16_t)(value * (float)UINT16_MAX / max_value);
+    return (uint16_t)(trim_value(value) * (float)UINT16_MAX);
 }
 
 void CfipNeopixel::print(std::stringstream &ss) const
@@ -69,7 +62,8 @@ void CfipNeopixel::print(std::stringstream &ss) const
 
 void CfipNeopixelV1::update(float value)
 {
-    update_(value, 1, CfipNeopixelV1::NUM_OF_PIXELS-1);
+    get_strip_()->clear();
+    update_(value, 1, (uint8_t)(value * 10.0f));
 }
 
 //------------------------------------------------------------------------------

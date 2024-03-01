@@ -56,12 +56,7 @@ void CVarioV1::set_altitude(float altitude)
 
 float CVarioV1::get_norm() const
 {
-    static const float max_value = {1.0f};
-    static const float min_value = {0.0f};
-
-    float value = get() / get_max_value();
-    value = value < min_value ? min_value : value;
-    return value > max_value ? max_value : value;
+    return trim_value(get() / get_max_value());
 };
 
 float CVarioV1::calculate_vario()
