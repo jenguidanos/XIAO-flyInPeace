@@ -22,8 +22,12 @@ class CfipNeopixel : public CfipVisualizer
     Adafruit_NeoPixel strip_;
     uint16_t hue_;
 
-  private:
-    uint16_t palette(float vario);
+  protected:
+    uint16_t palette_(float vario);
+    Adafruit_NeoPixel* get_strip_() {return &strip_;};
+    uint16_t get_hue_() {return hue_;};
+    void set_hue_(uint16_t hue) {hue_ = hue;};
+    void update_(float value, uint16_t first, uint16_t cnt);
 
   public:
     CfipNeopixel(uint8_t pin, uint8_t num_of_pixels);
@@ -32,6 +36,18 @@ class CfipNeopixel : public CfipVisualizer
     err_code_t setup() override;
     void update(float value) override;
     void print(std::stringstream &ss) const override;
+};
+
+class CfipNeopixelV1 : public CfipNeopixel
+{
+  private:
+    static const uint8_t NUM_OF_PIXELS {9};
+
+  public:
+    CfipNeopixelV1(uint8_t pin) : CfipNeopixel(pin, NUM_OF_PIXELS){}
+    ~CfipNeopixelV1() = default;
+
+    void update(float value) override;
 };
 
 } // namespace vaf::fip

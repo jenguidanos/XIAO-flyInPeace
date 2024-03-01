@@ -55,6 +55,9 @@ void setup()
 
     sound_curve = CFactoryCurve::create(CURVE_TYPE_V1);
     initialize_fip_object(sound_curve);
+
+    visualization_curve = CFactoryCurve::create(CURVE_TYPE_V1);
+    initialize_fip_object(visualization_curve);
 }
 
 static void initialize_fip_object(CfipObj *obj)
@@ -76,13 +79,13 @@ void loop()
     sound_curve->update(vario);
     sound->update(sound_curve->get());
 
-    //visualization_curve->update(vario);
-    //visualizer->update(visualization_curve->get());
+    visualization_curve->update(vario);
+    visualizer->update(visualization_curve->get());
 
     std::stringstream ss;
     barometer->print(ss);
     variometer->print(ss);
-    //visualizer->print(ss);
+    visualizer->print(ss);
     sound_curve->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 }
