@@ -80,7 +80,7 @@ class CfipVario : public CfipBarometer
     }
 
   public:
-    CfipVario() : max_value_(10.f)
+    CfipVario() : max_value_(10.0f)
     {
     }
     CfipVario(float max_value) : max_value_(max_value)
