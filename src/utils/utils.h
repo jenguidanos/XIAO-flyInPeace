@@ -41,7 +41,10 @@ class CMovAvg : public CfipObj
     }
 };
 
+float fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh);
+
 } // namespace vaf::fip
+
 
 //------------------------------------------------------------------------------
 

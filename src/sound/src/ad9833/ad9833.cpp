@@ -7,6 +7,7 @@
 
 #include "ad9833.h"
 #include <SPI.h>
+#include <utils/utils.h>
 
 using namespace vaf::fip;
 
@@ -29,15 +30,15 @@ err_code_t CSoundAD9833::setup()
 
 void CSoundAD9833::update(float value)
 {
-    static const float max_vario = 1.0f;
     static const float max_freq = 600.0f;
-    tone_ = value > 0.2f ? ((value * max_freq) / max_vario) : 0.0f;
-    ad_.setFrequency(MD_AD9833::CHAN_0, tone_);
+    tone_ = (uint32_t)(value * max_freq);
+    tone_? powerup() : powerdown();
+    ad_.setFrequency(MD_AD9833::CHAN_0, (uint32_t)tone_);
 }
 
 void CSoundAD9833::powerdown(void)
 {
-    digitalWrite(CSoundAD9833::pin_shutdown_, HIGH); // Should be low to powerdown
+    digitalWrite(CSoundAD9833::pin_shutdown_, LOW);
 }
 
 void CSoundAD9833::powerup(void)

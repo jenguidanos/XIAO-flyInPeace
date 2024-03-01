@@ -50,4 +50,9 @@ CMovAvg::~CMovAvg()
     _buffer = nullptr;
 }
 
+float vaf::fip::fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh)
+{
+  return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+}
+
 //------------------------------------------------------------------------------
