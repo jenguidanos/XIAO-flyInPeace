@@ -52,7 +52,7 @@ CMovAvg::~CMovAvg()
 
 float vaf::fip::fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh)
 {
-  return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+    return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
 }
 
 float vaf::fip::trim_value(float value)
@@ -63,7 +63,7 @@ float vaf::fip::trim_value(float value)
     if (value < min_value)
         return min_value;
 
-    return value > max_value? max_value : value;
+    return value > max_value ? max_value : value;
 }
 
 //------------------------------------------------------------------------------

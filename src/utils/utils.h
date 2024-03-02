@@ -46,7 +46,6 @@ float trim_value(float value);
 
 } // namespace vaf::fip
 
-
 //------------------------------------------------------------------------------
 
 #endif /* UTILS_H */

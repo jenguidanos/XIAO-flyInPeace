@@ -51,7 +51,10 @@ class CfipButtonV1 : public CfipButton
     ~CfipButtonV1() = default;
 
     void update() override;
-    eEvent get_event() const {return event_;}
+    eEvent get_event() const
+    {
+        return event_;
+    }
     err_code_t setup() override;
     void print(std::stringstream &ss) const override;
 };

@@ -43,7 +43,6 @@ void CfipButtonV1::update()
 
     int now_pressed(!digitalRead(pin_));
 
-
     if (!now_pressed && was_pressed_ && !generated_event_)
     {
         // handle release event
@@ -80,7 +79,7 @@ void CfipButtonV1::update()
 
 void CfipButtonV1::print(std::stringstream &ss) const
 {
-    const char* msg = EV_NONE != get_event()? "1" : "0";
+    const char *msg = EV_NONE != get_event() ? "1" : "0";
     ss << " Pressed: " << std::string(msg);
 }
 
@@ -128,7 +127,7 @@ uint8_t CfibButtonV2::is_up() const
 
 void CfibButtonV2::print(std::stringstream &ss) const
 {
-    ss << " Pressed: " << is_down()? "YES" : "NO";
+    ss << " Pressed: " << is_down() ? "YES" : "NO";
 }
 
 //------------------------------------------------------------------------------

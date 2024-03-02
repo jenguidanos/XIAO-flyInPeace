@@ -24,7 +24,7 @@ class CSoundAD9833 : public CfipSound
     static const uint8_t pin_cs_;       ///< SPI Load pin number (FSYNC in AD9833 usage)
     static const uint8_t pin_shutdown_; ///< Power down pin
     MD_AD9833 ad_;
-    float tone_ {0.0f};
+    float tone_{0.0f};
 
     void powerdown();
     void powerup();

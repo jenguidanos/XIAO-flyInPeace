@@ -13,13 +13,13 @@
 
 #include "config.h"
 #include <barometer/barometer.h>
+#include <buttons/button.h>
 #include <commons.h>
+#include <curve/curve.h>
 #include <iomanip>
 #include <sound/sound.h>
 #include <variometer/variometer.h>
 #include <visualizer/visualizer.h>
-#include <buttons/button.h>
-#include <curve/curve.h>
 
 using namespace vaf::fip;
 
@@ -62,10 +62,10 @@ void setup()
     visualization_curve = CFactoryCurve::create(CURVE_TYPE_V1);
     initialize_fip_object(visualization_curve);
 
-    button0 = new CfipButtonV1(D2, DEFAULT_LONG_PRESS_LEN);
+    button0 = new CfipButtonV1(BUTTON_PIN0, DEFAULT_LONG_PRESS_LEN);
     initialize_fip_object(button0);
 
-    button1 = new CfipButtonV1(D9, DEFAULT_LONG_PRESS_LEN);
+    button1 = new CfipButtonV1(BUTTON_PIN1, DEFAULT_LONG_PRESS_LEN);
     initialize_fip_object(button1);
 }
 
@@ -80,18 +80,17 @@ static void initialize_fip_object(CfipObj *obj)
     } while (ERR_CODE_NONE != obj->setup());
 }
 
-
 float cnt = 0.0f;
 void loop()
 {
-    //variometer->update();
-    //float vario = variometer->get_norm();
+    // variometer->update();
+    // float vario = variometer->get_norm();
 
-    //sound_curve->update(vario);
+    // sound_curve->update(vario);
     sound_curve->update(cnt);
-    //sound->update(sound_curve->get());
+    // sound->update(sound_curve->get());
 
-    //visualization_curve->update(vario);
+    // visualization_curve->update(vario);
     visualization_curve->update(cnt);
     visualizer->update(visualization_curve->get());
 
@@ -100,18 +99,16 @@ void loop()
 
     if (EV_SHORT_PRESS == button0->get_event())
     {
-        cnt+=0.1f;
-        if(cnt > 1.0f) cnt = 0.0f;
-    }
-    if (EV_LONG_PRESS == button1->get_event())
-    {
-        cnt=0.02f;
+        cnt += 0.05f;
+        if (cnt > 1.0f)
+            cnt = 0.0f;
     }
 
     if (EV_SHORT_PRESS == button1->get_event())
     {
-        cnt-=0.1f;
-        if(cnt < 0.0f) cnt = 1.0f;   
+        cnt -= 0.05f;
+        if (cnt < 0.0f)
+            cnt = 1.0f;
     }
 
     std::stringstream ss;
@@ -129,4 +126,3 @@ void loop()
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
-

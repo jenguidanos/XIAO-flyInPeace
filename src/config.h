@@ -40,12 +40,12 @@ const uint8_t STRIP_PIN(D3);
 /**
  * Button0 pin assignment
  */
-const uint8_t BUTTON_PIN0(8);
+const uint8_t BUTTON_PIN0(D2);
 
 /**
  * Button1 pin assignment
  */
-const uint8_t BUTTON_PIN1(7);
+const uint8_t BUTTON_PIN1(D9);
 
 //-----------------------------------------------------------------------------
 
