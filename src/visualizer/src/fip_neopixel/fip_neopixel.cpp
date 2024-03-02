@@ -63,15 +63,14 @@ void CfipNeopixel::print(std::stringstream &ss) const
 
 void CfipNeopixelV1::update(float value)
 {
-    get_strip_()->clear();
-    uint8_t num_of_pixels = (uint8_t)(8.0f * (1.0f - value));
-    num_of_pixels = num_of_pixels ? num_of_pixels : 1;
+    static const uint8_t MAX_BRIGHTNESS{100};
+    static const uint8_t MIN_BRIGHTNESS{30};
+    static const uint8_t WHEEL_SIZE{8};
+    static const uint16_t FIRST{1};
 
-    static const uint8_t MAX_BRIGHTNESS{175};
-    static const uint8_t MIN_BRIGHTNESS{50};
-    static const uint8_t WHEEL_SIZE{8};
-    static const uint8_t WHEEL_SIZE{8};
-    static const uint16_t FIRST{8};
+    get_strip_()->clear();
+    uint8_t num_of_pixels = (uint8_t)(ceil((float)WHEEL_SIZE * (1.0f - value)));
+    num_of_pixels = num_of_pixels ? num_of_pixels : FIRST;
 
     update_(value, FIRST, num_of_pixels, map(num_of_pixels, 1, WHEEL_SIZE, MIN_BRIGHTNESS, MAX_BRIGHTNESS));
 }
