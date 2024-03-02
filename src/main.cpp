@@ -80,6 +80,19 @@ static void initialize_fip_object(CfipObj *obj)
     } while (ERR_CODE_NONE != obj->setup());
 }
 
+static void print_output(void)
+{
+    std::stringstream ss;
+    barometer->print(ss);
+    variometer->print(ss);
+    visualizer->print(ss);
+    sound_curve->print(ss);
+    visualization_curve->print(ss);
+    button0->print(ss);
+    button1->print(ss);
+    SERIAL_PRINTLN(ss.str().c_str());
+}
+
 #define DEBUG
 
 float cnt = 0.0f;
@@ -118,15 +131,7 @@ void loop()
     visualization_curve->update(vario);
     visualizer->update(visualization_curve->get());
 
-    std::stringstream ss;
-    barometer->print(ss);
-    variometer->print(ss);
-    visualizer->print(ss);
-    sound_curve->print(ss);
-    visualization_curve->print(ss);
-    button0->print(ss);
-    button1->print(ss);
-    SERIAL_PRINTLN(ss.str().c_str());
+    print_output();
 
 #ifdef DEBUG
     delay(50);
