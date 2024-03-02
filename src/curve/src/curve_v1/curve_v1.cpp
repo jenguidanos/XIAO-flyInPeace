@@ -12,22 +12,44 @@ using namespace vaf::fip;
 
 //------------------------------------------------------------------------------
 
-err_code_t CCurveV1::setup()
+err_code_t CCurveSoundV1::setup()
 {
     return ERR_CODE_NONE;
 }
 
-void CCurveV1::update(float value)
+void CCurveSoundV1::update(float value)
 {
     computed_value_ = value;
 }
 
-float CCurveV1::get() const
+float CCurveSoundV1::get() const
 {
     return computed_value_;
 }
 
-void CCurveV1::print(std::stringstream &ss) const
+void CCurveSoundV1::print(std::stringstream &ss) const
+{
+    ss << " Curve: " << std::setw(6) << std::fixed << std::setprecision(2) << get();
+}
+
+//------------------------------------------------------------------------------
+
+err_code_t CCurveVisualizerV1::setup()
+{
+    return ERR_CODE_NONE;
+}
+
+void CCurveVisualizerV1::update(float value)
+{
+    computed_value_ = value;
+}
+
+float CCurveVisualizerV1::get() const
+{
+    return computed_value_;
+}
+
+void CCurveVisualizerV1::print(std::stringstream &ss) const
 {
     ss << " Curve: " << std::setw(6) << std::fixed << std::setprecision(2) << get();
 }

@@ -14,8 +14,10 @@ using namespace vaf::fip;
 
 CfipCurve *CFactoryCurve::create(curve_type_t type)
 {
-    if (CURVE_TYPE_V1 == type)
-        return new CCurveV1();
+    if (CURVE_TYPE_SOUND_V1 == type)
+        return new CCurveSoundV1();
+    if (CURVE_TYPE_VISUALIZER_V1 == type)
+        return new CCurveVisualizerV1();
     return new CfipCurve();
 }
 

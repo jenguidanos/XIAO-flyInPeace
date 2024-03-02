@@ -15,14 +15,29 @@
 namespace vaf::fip
 {
 
-class CCurveV1 : public CfipCurve
+class CCurveSoundV1 : public CfipCurve
 {
   private:
     float computed_value_;
 
   public:
-    CCurveV1() = default;
-    ~CCurveV1() = default;
+    CCurveSoundV1() = default;
+    ~CCurveSoundV1() = default;
+
+    err_code_t setup() override;
+    void update(float value) override;
+    float get() const override;
+    void print(std::stringstream &ss) const override;
+};
+
+class CCurveVisualizerV1 : public CfipCurve
+{
+  private:
+    float computed_value_;
+
+  public:
+    CCurveVisualizerV1() = default;
+    ~CCurveVisualizerV1() = default;
 
     err_code_t setup() override;
     void update(float value) override;

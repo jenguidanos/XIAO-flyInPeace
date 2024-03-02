@@ -56,10 +56,10 @@ void setup()
     variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
     initialize_fip_object(variometer);
 
-    sound_curve = CFactoryCurve::create(CURVE_TYPE_V1);
+    sound_curve = CFactoryCurve::create(CURVE_TYPE_SOUND_V1);
     initialize_fip_object(sound_curve);
 
-    visualization_curve = CFactoryCurve::create(CURVE_TYPE_V1);
+    visualization_curve = CFactoryCurve::create(CURVE_TYPE_VISUALIZER_V1);
     initialize_fip_object(visualization_curve);
 
     button0 = new CfipButtonV1(BUTTON_PIN0, DEFAULT_LONG_PRESS_LEN);
