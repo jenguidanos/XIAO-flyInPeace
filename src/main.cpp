@@ -83,19 +83,19 @@ static void initialize_fip_object(CfipObj *obj)
 float cnt = 0.0f;
 void loop()
 {
+    button0->update();
+    button1->update();
+
     // variometer->update();
     // float vario = variometer->get_norm();
 
     // sound_curve->update(vario);
     sound_curve->update(cnt);
-    // sound->update(sound_curve->get());
+    sound->update(sound_curve->get());
 
     // visualization_curve->update(vario);
     visualization_curve->update(cnt);
     visualizer->update(visualization_curve->get());
-
-    button0->update();
-    button1->update();
 
     if (EV_SHORT_PRESS == button0->get_event())
     {
