@@ -21,16 +21,28 @@ class CCurveSoundV1 : public CfipCurve
     float computed_value_;
 
   protected:
-    void set_value_(float value){computed_value_ = value;}
-    float get_value_(){return computed_value_;}
+    void set_value_(float value)
+    {
+        computed_value_ = value;
+    }
+    float get_value_()
+    {
+        return computed_value_;
+    }
 
   public:
     CCurveSoundV1() = default;
     ~CCurveSoundV1() = default;
 
-    err_code_t setup() override {return ERR_CODE_NONE;}
+    err_code_t setup() override
+    {
+        return ERR_CODE_NONE;
+    }
     void update(float value) override;
-    float get() const override { return computed_value_; }
+    float get() const override
+    {
+        return computed_value_;
+    }
     void print(std::stringstream &ss) const override;
 };
 

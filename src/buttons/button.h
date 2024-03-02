@@ -22,7 +22,7 @@
 namespace vaf::fip
 {
 
-#define DEFAULT_LONG_PRESS_LEN 20 // Min nr of loops for a long press
+#define DEFAULT_LONG_PRESS_LEN 5 // Min nr of loops for a long press
 
 //---[ Typedefs: ]--------------------------------------------------------------
 

@@ -26,7 +26,7 @@ void CCurveSoundV1::print(std::stringstream &ss) const
 
 void CCurveVisualizerV1::update(float value)
 {
-    set_value_(value? (1.0f - value) : value);
+    set_value_(value ? (1.0f - value) : value);
 }
 
 //------------------------------------------------------------------------------

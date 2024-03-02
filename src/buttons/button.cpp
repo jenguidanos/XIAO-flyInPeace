@@ -79,7 +79,8 @@ void CfipButtonV1::update()
 
 void CfipButtonV1::print(std::stringstream &ss) const
 {
-    const char *msg = EV_NONE != get_event() ? "1" : "0";
+    eEvent event = get_event();
+    const char *msg = EV_NONE != event ? (EV_LONG_PRESS != event ? "S" : "L") : "N";
     ss << " Pressed: " << std::string(msg);
 }
 
