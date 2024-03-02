@@ -99,16 +99,16 @@ void loop()
 
     if (EV_SHORT_PRESS == button0->get_event())
     {
-        cnt += 0.05f;
-        if (cnt > 1.0f)
-            cnt = 0.0f;
+        cnt -= 0.05f;
+        if (cnt < 0.0f)
+            cnt = 1.0f;
     }
 
     if (EV_SHORT_PRESS == button1->get_event())
     {
-        cnt -= 0.05f;
-        if (cnt < 0.0f)
-            cnt = 1.0f;
+        cnt += 0.05f;
+        if (cnt > 1.0f)
+            cnt = 0.0f;
     }
 
     std::stringstream ss;
@@ -116,6 +116,7 @@ void loop()
     variometer->print(ss);
     visualizer->print(ss);
     sound_curve->print(ss);
+    visualization_curve->print(ss);
     button0->print(ss);
     button1->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());

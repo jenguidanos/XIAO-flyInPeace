@@ -20,17 +20,21 @@ class CCurveSoundV1 : public CfipCurve
   private:
     float computed_value_;
 
+  protected:
+    void set_value_(float value){computed_value_ = value;}
+    float get_value_(){return computed_value_;}
+
   public:
     CCurveSoundV1() = default;
     ~CCurveSoundV1() = default;
 
-    err_code_t setup() override;
+    err_code_t setup() override {return ERR_CODE_NONE;}
     void update(float value) override;
-    float get() const override;
+    float get() const override { return computed_value_; }
     void print(std::stringstream &ss) const override;
 };
 
-class CCurveVisualizerV1 : public CfipCurve
+class CCurveVisualizerV1 : public CCurveSoundV1
 {
   private:
     float computed_value_;
@@ -39,10 +43,7 @@ class CCurveVisualizerV1 : public CfipCurve
     CCurveVisualizerV1() = default;
     ~CCurveVisualizerV1() = default;
 
-    err_code_t setup() override;
     void update(float value) override;
-    float get() const override;
-    void print(std::stringstream &ss) const override;
 };
 
 } // namespace vaf::fip
