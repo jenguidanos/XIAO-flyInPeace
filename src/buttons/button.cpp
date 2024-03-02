@@ -25,8 +25,7 @@ CfipButtonV1::CfipButtonV1(int p, int lp)
 
 err_code_t CfipButtonV1::setup()
 {
-    pinMode(pin_, INPUT);
-    digitalWrite(pin_, HIGH); // pull-up
+    pinMode(pin_, INPUT_PULLUP);
     was_pressed_ = false;
     pressed_counter_ = 0;
     lastLoopTime_ = millis();
@@ -43,6 +42,7 @@ void CfipButtonV1::update()
     lastLoopTime_ = millis();
 
     int now_pressed(!digitalRead(pin_));
+
 
     if (!now_pressed && was_pressed_ && !generated_event_)
     {
@@ -80,7 +80,7 @@ void CfipButtonV1::update()
 
 void CfipButtonV1::print(std::stringstream &ss) const
 {
-    const char* msg = EV_NONE != get_event()? "YES" : "NO";
+    const char* msg = EV_NONE != get_event()? "1" : "0";
     ss << " Pressed: " << std::string(msg);
 }
 

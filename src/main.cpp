@@ -101,9 +101,9 @@ void loop()
     if (EV_SHORT_PRESS == button0->get_event())
     {
         cnt+=0.1f;
-        if(cnt > 1.0f) cnt = 1.0f;
+        if(cnt > 1.0f) cnt = 0.0f;
     }
-    if (EV_LONG_PRESS == button0->get_event())
+    if (EV_LONG_PRESS == button1->get_event())
     {
         cnt=0.02f;
     }
@@ -111,7 +111,7 @@ void loop()
     if (EV_SHORT_PRESS == button1->get_event())
     {
         cnt-=0.1f;
-        if(cnt < 0.0f) cnt = 0.0f;   
+        if(cnt < 0.0f) cnt = 1.0f;   
     }
 
     std::stringstream ss;
