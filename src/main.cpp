@@ -80,23 +80,18 @@ static void initialize_fip_object(CfipObj *obj)
     } while (ERR_CODE_NONE != obj->setup());
 }
 
+#define DEBUG
+
 float cnt = 0.0f;
+
 void loop()
 {
     button0->update();
     button1->update();
 
-    // variometer->update();
-    // float vario = variometer->get_norm();
+    float vario = {0};
 
-    // sound_curve->update(vario);
-    sound_curve->update(cnt);
-    sound->update(sound_curve->get());
-
-    // visualization_curve->update(vario);
-    visualization_curve->update(cnt);
-    visualizer->update(visualization_curve->get());
-
+#ifdef DEBUG
     if (EV_SHORT_PRESS == button0->get_event())
     {
         cnt -= 0.05f;
@@ -111,6 +106,18 @@ void loop()
             cnt = 0.0f;
     }
 
+    vario = cnt;
+#else
+    variometer->update();
+    vario = variometer->get_norm();
+#endif
+
+    sound_curve->update(vario);
+    sound->update(sound_curve->get());
+
+    visualization_curve->update(vario);
+    visualizer->update(visualization_curve->get());
+
     std::stringstream ss;
     barometer->print(ss);
     variometer->print(ss);
@@ -121,7 +128,9 @@ void loop()
     button1->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 
+#ifdef DEBUG
     delay(50);
+#endif
 }
 
 //------------------------------------------------------------------------------
