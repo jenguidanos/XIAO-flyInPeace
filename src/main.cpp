@@ -93,16 +93,17 @@ static void print_output(void)
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
-#define DEBUG
+//#define DEBUG
 
 float cnt = 0.0f;
 
 void loop()
 {
+    float vario = {0};
+
+    variometer->update();
     button0->update();
     button1->update();
-
-    float vario = {0};
 
 #ifdef DEBUG
     if (EV_SHORT_PRESS == button0->get_event())
@@ -121,7 +122,6 @@ void loop()
 
     vario = cnt;
 #else
-    variometer->update();
     vario = variometer->get_norm();
 #endif
 
@@ -132,10 +132,6 @@ void loop()
     visualizer->update(visualization_curve->get());
 
     print_output();
-
-#ifdef DEBUG
-    delay(50);
-#endif
 }
 
 //------------------------------------------------------------------------------
