@@ -18,6 +18,7 @@
 #include <sound/sound.h>
 #include <variometer/variometer.h>
 #include <visualizer/visualizer.h>
+#include <buttons/button.h>
 #include <curve/curve.h>
 
 using namespace vaf::fip;
@@ -30,6 +31,8 @@ static CfipVisualizer *visualizer{nullptr};
 static CfipBarometer *barometer{nullptr};
 static CfipCurve *sound_curve{nullptr};
 static CfipCurve *visualization_curve{nullptr};
+static CfipButtonV1 *button0{nullptr};
+static CfipButtonV1 *button1{nullptr};
 
 //---[ Declarations: ]----------------------------------------------------------
 
@@ -58,6 +61,12 @@ void setup()
 
     visualization_curve = CFactoryCurve::create(CURVE_TYPE_V1);
     initialize_fip_object(visualization_curve);
+
+    button0 = new CfipButtonV1(D2, DEFAULT_LONG_PRESS_LEN);
+    initialize_fip_object(button0);
+
+    button1 = new CfipButtonV1(D9, DEFAULT_LONG_PRESS_LEN);
+    initialize_fip_object(button1);
 }
 
 static void initialize_fip_object(CfipObj *obj)
@@ -86,18 +95,38 @@ void loop()
     visualization_curve->update(cnt);
     visualizer->update(visualization_curve->get());
 
+    button0->update();
+    button1->update();
+
+    if (EV_SHORT_PRESS == button0->get_event())
+    {
+        cnt+=0.1f;
+        if(cnt > 1.0f) cnt = 1.0f;
+    }
+    if (EV_LONG_PRESS == button0->get_event())
+    {
+        cnt=0.02f;
+    }
+
+    if (EV_SHORT_PRESS == button1->get_event())
+    {
+        cnt-=0.1f;
+        if(cnt < 0.0f) cnt = 0.0f;   
+    }
+
     std::stringstream ss;
     barometer->print(ss);
     variometer->print(ss);
     visualizer->print(ss);
     sound_curve->print(ss);
+    button0->print(ss);
+    button1->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 
-    cnt+=0.1f;
-    if(cnt > 1.0f) cnt = 0.0f;
-    delay(250);
+    delay(50);
 }
 
 //------------------------------------------------------------------------------
 
 // -- END OF FILE --
+

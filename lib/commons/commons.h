@@ -142,6 +142,16 @@ class CfipCurve : public CfipObj
     };
 };
 
+class CfipButton : public CfipObj
+{
+  public:
+    virtual ~CfipButton() = default;
+    const char *objType() override
+    {
+        return "CfipButton";
+    };
+};
+
 } // namespace vaf::fip
 
 //------------------------------------------------------------------------------

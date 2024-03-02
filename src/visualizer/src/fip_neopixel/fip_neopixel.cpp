@@ -44,7 +44,7 @@ void CfipNeopixel::update_(float value, uint16_t first, uint16_t cnt)
 
     Adafruit_NeoPixel* strip = get_strip_();
 
-    uint32_t color = get_hue_() ? strip->gamma32(strip->ColorHSV(get_hue_(), 255, 255)) : 0;
+    uint32_t color = get_hue_() ? strip->gamma32(strip->ColorHSV(get_hue_(), 255, 50)) : 0;
 
     strip->fill(color, first, cnt);
     strip->show();
@@ -52,7 +52,7 @@ void CfipNeopixel::update_(float value, uint16_t first, uint16_t cnt)
 
 uint16_t CfipNeopixel::palette_(float value)
 {
-    return (uint16_t)(trim_value(value) * (float)UINT16_MAX);
+    return UINT16_MAX - (uint16_t)(trim_value(value) * (float)UINT16_MAX);
 }
 
 void CfipNeopixel::print(std::stringstream &ss) const
@@ -63,7 +63,7 @@ void CfipNeopixel::print(std::stringstream &ss) const
 void CfipNeopixelV1::update(float value)
 {
     get_strip_()->clear();
-    update_(value, 1, (uint8_t)(value * 10.0f));
+    update_(value, 1, 2);
 }
 
 //------------------------------------------------------------------------------

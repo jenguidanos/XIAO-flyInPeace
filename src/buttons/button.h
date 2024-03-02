@@ -9,18 +9,20 @@
 
 //---[ Includes: ]--------------------------------------------------------------
 
-namespace vaf::fip
-{
-
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
 #include "WProgram.h"
 #endif
 
+#include <commons.h>
+
 //---[ Global defines: ]--------------------------------------------------------
 
-#define DEFAULT_LONG_PRESS_LEN 30 // Min nr of loops for a long press
+namespace vaf::fip
+{
+
+#define DEFAULT_LONG_PRESS_LEN 20 // Min nr of loops for a long press
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
@@ -33,35 +35,35 @@ enum eEvent
 
 //------------------------------------------------------------------------------
 
-class CfipButtonV1
+class CfipButtonV1 : public CfipButton
 {
   protected:
-    boolean _was_pressed;      // previous state
-    boolean _generated_event;  // generated event before release button
-    int _pressed_counter;      // press running duration
-    const uint8_t _pin;        // pin to which button is connected
-    const int _long_press_len; // long-press duration
-    long _lastLoopTime;
+    boolean was_pressed_;      // previous state
+    boolean generated_event_;  // generated event before release button
+    int pressed_counter_;      // press running duration
+    const uint8_t pin_;        // pin to which button is connected
+    const int long_press_len_; // long-press duration
+    long lastLoopTime_;
+    eEvent event_;
 
   public:
     explicit CfipButtonV1(int pin, int long_press_len = DEFAULT_LONG_PRESS_LEN);
     ~CfipButtonV1() = default;
 
-    // Initialization done after construction, to permit static instances
-    void init();
-
-    // Handler, to be called in the loop()
-    eEvent handle();
+    void update() override;
+    eEvent get_event() const {return event_;}
+    err_code_t setup() override;
+    void print(std::stringstream &ss) const override;
 };
 
 //------------------------------------------------------------------------------
 // http://hackaday.com/2015/12/10/embed-with-elliot-debounce-your-noisy-buttons-part-ii/
 
-class CfibButtonV2
+class CfibButtonV2 : public CfipButton
 {
   protected:
-    uint8_t _button_history;
-    const uint8_t _pin; // pin to which button is connected
+    uint8_t button_history_;
+    const uint8_t pin_; // pin to which button is connected
 
   public:
     explicit CfibButtonV2(uint8_t pin);
@@ -71,6 +73,8 @@ class CfibButtonV2
     uint8_t is_released();
     uint8_t is_down() const;
     uint8_t is_up() const;
+
+    void print(std::stringstream &ss) const override;
 };
 
 } // namespace vaf::fip
