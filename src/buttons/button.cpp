@@ -14,120 +14,121 @@
 
 #include "button.h"
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipButtonV1::CfipButtonV1(int p, int lp)
-    : _was_pressed(false), _generated_event(false), _pressed_counter(0), _pin(p), _long_press_len(lp), _lastLoopTime(0)
+    : was_pressed_(false), generated_event_(false), pressed_counter_(0), pin_(p), long_press_len_(lp), lastLoopTime_(0)
 {
 }
 
-//------------------------------------------------------------------------------
-
-void CfipButtonV1::init()
+err_code_t CfipButtonV1::setup()
 {
-    pinMode(_pin, INPUT);
-    digitalWrite(_pin, HIGH); // pull-up
-    _was_pressed = false;
-    _pressed_counter = 0;
-    _lastLoopTime = millis();
+    pinMode(pin_, INPUT_PULLUP);
+    was_pressed_ = false;
+    pressed_counter_ = 0;
+    lastLoopTime_ = millis();
+    return ERR_CODE_NONE;
 }
 
-//------------------------------------------------------------------------------
-
-eEvent CfipButtonV1::handle()
+void CfipButtonV1::update()
 {
-    eEvent event(EV_NONE);
+    event_ = EV_NONE;
 
-    if (millis() - _lastLoopTime < 20)
-        return event;
+    if (millis() - lastLoopTime_ < 20)
+        return;
 
-    _lastLoopTime = millis();
+    lastLoopTime_ = millis();
 
-    int now_pressed(!digitalRead(_pin));
+    int now_pressed(!digitalRead(pin_));
 
-    if (!now_pressed && _was_pressed && !_generated_event)
+    if (!now_pressed && was_pressed_ && !generated_event_)
     {
         // handle release event
-        if (_pressed_counter < _long_press_len)
-            event = EV_SHORT_PRESS;
+        if (pressed_counter_ < long_press_len_)
+            event_ = EV_SHORT_PRESS;
         else
-            event = EV_LONG_PRESS;
+            event_ = EV_LONG_PRESS;
     }
-    else if (now_pressed && _was_pressed)
+    else if (now_pressed && was_pressed_)
     {
         // handle release event
-        if (_pressed_counter > _long_press_len)
+        if (pressed_counter_ > long_press_len_)
         {
-            _pressed_counter = 0;
-            event = EV_LONG_PRESS;
-            _generated_event = true;
+            pressed_counter_ = 0;
+            event_ = EV_LONG_PRESS;
+            generated_event_ = true;
         }
     }
 
     // update press running duration
     if (now_pressed)
     {
-        ++_pressed_counter;
+        ++pressed_counter_;
     }
     else
     {
-        _pressed_counter = 0;
-        _generated_event = false;
+        pressed_counter_ = 0;
+        generated_event_ = false;
     }
 
     // remember state, and we're done
-    _was_pressed = now_pressed;
-    return event;
+    was_pressed_ = now_pressed;
 }
 
-//------------------------------------------------------------------------------
-
-CfibButtonV2::CfibButtonV2(uint8_t p) : _button_history(0x00), _pin(p)
+void CfipButtonV1::print(std::stringstream &ss) const
 {
-    pinMode(_pin, INPUT);
-    digitalWrite(_pin, HIGH); // pull-up
+    eEvent event = get_event();
+    const char *msg = EV_NONE != event ? (EV_LONG_PRESS != event ? "S" : "L") : "N";
+    ss << " Pressed: " << std::string(msg);
 }
 
 //------------------------------------------------------------------------------
+
+CfibButtonV2::CfibButtonV2(uint8_t p) : button_history_(0x00), pin_(p)
+{
+    pinMode(pin_, INPUT);
+    digitalWrite(pin_, HIGH); // pull-up
+}
 
 uint8_t CfibButtonV2::is_pressed()
 {
-    _button_history = _button_history << 1;
-    _button_history |= digitalRead(_pin);
-    if ((_button_history & B11000111) == B00000111)
+    button_history_ = button_history_ << 1;
+    button_history_ |= digitalRead(pin_);
+    if ((button_history_ & B11000111) == B00000111)
     {
-        _button_history = B11111111;
+        button_history_ = B11111111;
         return 1;
     }
     return 0;
 }
-
-//------------------------------------------------------------------------------
 
 uint8_t CfibButtonV2::is_released()
 {
-    _button_history = _button_history << 1;
-    _button_history |= digitalRead(_pin);
-    if ((_button_history & B11000111) == B11000000)
+    button_history_ = button_history_ << 1;
+    button_history_ |= digitalRead(pin_);
+    if ((button_history_ & B11000111) == B11000000)
     {
-        _button_history = B00000000;
+        button_history_ = B00000000;
         return 1;
     }
     return 0;
 }
 
-//------------------------------------------------------------------------------
-
 uint8_t CfibButtonV2::is_down() const
 {
-    return (_button_history == B11111111);
+    return (button_history_ == B11111111);
 }
-
-//------------------------------------------------------------------------------
 
 uint8_t CfibButtonV2::is_up() const
 {
-    return (_button_history == B00000000);
+    return (button_history_ == B00000000);
+}
+
+void CfibButtonV2::print(std::stringstream &ss) const
+{
+    ss << " Pressed: " << is_down() ? "YES" : "NO";
 }
 
 //------------------------------------------------------------------------------

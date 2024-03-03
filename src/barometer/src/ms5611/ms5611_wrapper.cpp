@@ -14,6 +14,8 @@
 #include "ms5611_wrapper.h"
 #include <iomanip>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 err_code_t CBarometerMS5611::setup()

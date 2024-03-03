@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <persistence/persistence.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 err_code_t CVarioV1::setup()
@@ -52,6 +54,11 @@ void CVarioV1::set_altitude(float altitude)
     _persistence.write(0, _sea_level_pressure);
 }
 
+float CVarioV1::get_norm() const
+{
+    return trim_value(get() / get_max_value());
+};
+
 float CVarioV1::calculate_vario()
 {
     float h = _altitude - _prev_altitude;
@@ -67,7 +74,8 @@ float CVarioV1::calculate_vario()
 void CVarioV1::print(std::stringstream &ss) const
 {
     ss << " Altitude: " << std::setw(5) << std::fixed << std::setprecision(1) << get_altitude();
-    ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << get_vario();
+    ss << " Vario: (m/s)" << std::setw(8) << std::fixed << std::setprecision(3) << get();
+    ss << " Vario_norm: " << std::setw(8) << std::fixed << std::setprecision(3) << get_norm();
 }
 
 //------------------------------------------------------------------------------

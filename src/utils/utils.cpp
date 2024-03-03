@@ -8,6 +8,8 @@
 #include "utils.h"
 #include <cmath>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 err_code_t CMovAvg::setup()
@@ -46,6 +48,22 @@ CMovAvg::~CMovAvg()
     if (_buffer)
         free(_buffer);
     _buffer = nullptr;
+}
+
+float vaf::fip::fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh)
+{
+    return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+}
+
+float vaf::fip::trim_value(float value)
+{
+    static const float max_value = {1.0f};
+    static const float min_value = {0.0f};
+
+    if (value < min_value)
+        return min_value;
+
+    return value > max_value ? max_value : value;
 }
 
 //------------------------------------------------------------------------------

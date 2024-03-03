@@ -12,6 +12,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 class CMovAvg : public CfipObj
 {
   private:
@@ -37,6 +40,11 @@ class CMovAvg : public CfipObj
         return _movAvg;
     }
 };
+
+float fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh);
+float trim_value(float value);
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

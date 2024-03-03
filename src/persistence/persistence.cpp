@@ -3,9 +3,13 @@
  *  @author Cooked by Vicente A. (TT)
  */
 
-//---[ Includes: ]-------------------------------------------------------------
+//---[ Includes: ]--------------------------------------------------------------
 
 #include "persistence.h"
+
+using namespace vaf::fip;
+
+//---[ Defines: ]---------------------------------------------------------------
 
 #define PERSISTENCE_STORAGE_SIZE 1024
 

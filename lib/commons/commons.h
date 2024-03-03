@@ -13,6 +13,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 const float DEFAULT_SEA_LEVEL_PRESSURE{1013.25};
 const float ABSOLUTE_ZERO{273.15f};
 
@@ -30,8 +33,12 @@ class CfipObj
     CfipObj() = default;
     virtual ~CfipObj() = default;
 
-    virtual const char* objType(){return "CfipObj";};
+    virtual const char *objType()
+    {
+        return "CfipObj";
+    };
     virtual void update(){};
+    virtual void update(float value){};
     virtual err_code_t setup()
     {
         return ERR_CODE_SETUP;
@@ -47,7 +54,10 @@ class CfipBarometer : public CfipObj
     CfipBarometer() = default;
     virtual ~CfipBarometer() = default;
 
-    const char* objType() override {return "CfipBarometer";};
+    const char *objType() override
+    {
+        return "CfipBarometer";
+    };
     virtual float get_pressure() const
     {
         return 0.0f;
@@ -60,14 +70,39 @@ class CfipBarometer : public CfipObj
 
 class CfipVario : public CfipBarometer
 {
+  private:
+    float max_value_;
+
+  protected:
+    float get_max_value() const
+    {
+        return max_value_;
+    }
+
   public:
-    const char* objType() override {return "CfipVario";};
+    CfipVario() : max_value_(10.0f)
+    {
+    }
+    CfipVario(float max_value) : max_value_(max_value)
+    {
+        if (max_value_ <= 0)
+            max_value_ = 10.0f;
+    }
+    virtual ~CfipVario() = default;
+    const char *objType() override
+    {
+        return "CfipVario";
+    };
     virtual void set_altitude(float altitude){};
     virtual float get_altitude() const
     {
         return 0.0f;
     }
-    virtual float get_vario() const
+    virtual float get() const
+    {
+        return 0.0f;
+    }
+    virtual float get_norm() const
     {
         return 0.0f;
     }
@@ -76,16 +111,48 @@ class CfipVario : public CfipBarometer
 class CfipSound : public CfipObj
 {
   public:
-    const char* objType() override {return "CfipSound";};
-    virtual void set_vario(float vario){};
+    virtual ~CfipSound() = default;
+    const char *objType() override
+    {
+        return "CfipSound";
+    };
 };
 
 class CfipVisualizer : public CfipObj
 {
   public:
-    const char* objType() override {return "CfipVisualizer";};
-    virtual void set_vario(float vario){};
+    virtual ~CfipVisualizer() = default;
+    const char *objType() override
+    {
+        return "CfipVisualizer";
+    };
 };
+
+class CfipCurve : public CfipObj
+{
+  public:
+    virtual ~CfipCurve() = default;
+    const char *objType() override
+    {
+        return "CfipCurve";
+    };
+    virtual float get() const
+    {
+        return 0.0f;
+    };
+};
+
+class CfipButton : public CfipObj
+{
+  public:
+    virtual ~CfipButton() = default;
+    const char *objType() override
+    {
+        return "CfipButton";
+    };
+};
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

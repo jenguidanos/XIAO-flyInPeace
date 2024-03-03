@@ -1,10 +1,10 @@
 /**
- *  @brief Generic sound handler API and factory class declarations
+ *  @brief Generic curve API and factory class declarations
  *  @author Cooked by vabarca (TT)
  */
 
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef CURVE_H
+#define CURVE_H
 
 //---[ Includes: ]--------------------------------------------------------------
 
@@ -15,23 +15,24 @@
 namespace vaf::fip
 {
 
-typedef enum sound_type_e
+typedef enum curve_type_e
 {
-    SOUND_TYPE_UNKNOWN,
-    SOUND_TYPE_AD9833,
+    CURVE_TYPE_UNKNOWN,
+    CURVE_TYPE_SOUND_V1,
+    CURVE_TYPE_VISUALIZER_V1,
 
-    SOUND_TYPE_MAX_NUM
-} sound_type_t;
+    CURVE_TYPE_MAX_NUM
+} curve_type_t;
 
-class CFactorySound
+class CFactoryCurve
 {
   public:
-    virtual ~CFactorySound() = default;
-    static CfipSound *create(sound_type_t type);
+    virtual ~CFactoryCurve() = default;
+    static CfipCurve *create(curve_type_t type);
 };
 
 } // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 
-#endif /* SOUND_H */
+#endif /* CURVE_H */

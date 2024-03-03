@@ -11,6 +11,9 @@
 
 //---[ Methods: ]-------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 class CfipPersistence
 {
   public:
@@ -45,6 +48,8 @@ template <class T> int CfipPersistence::write(int ee, const T &target)
     EEPROM.commit();
     return i;
 }
+
+} // namespace vaf::fip
 
 //-----------------------------------------------------------------------------
 

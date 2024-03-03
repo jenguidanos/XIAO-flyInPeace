@@ -8,6 +8,8 @@
 #include "ad9833/ad9833.h"
 #include <sound/sound.h>
 
+using namespace vaf::fip;
+
 //------------------------------------------------------------------------------
 
 CfipSound *CFactorySound::create(sound_type_t type)

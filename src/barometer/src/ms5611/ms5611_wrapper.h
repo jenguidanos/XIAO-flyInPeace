@@ -13,6 +13,9 @@
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
+namespace vaf::fip
+{
+
 class CBarometerMS5611 : public CfipBarometer
 {
   private:
@@ -28,6 +31,8 @@ class CBarometerMS5611 : public CfipBarometer
     float get_temperature() const override;
     void print(std::stringstream &ss) const override;
 };
+
+} // namespace vaf::fip
 
 //------------------------------------------------------------------------------
 

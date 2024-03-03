@@ -13,51 +13,66 @@
 
 #include "fip_neopixel.h"
 #include <iomanip>
+#include <utils/utils.h>
+
+using namespace vaf::fip;
 
 //------------------------------------------------------------------------------
 
-CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels)
-    : strip(num_of_pixels, pin, NEO_GRB + NEO_KHZ800), max_vario{10.0f}, min_vario{0.5f}
+CfipNeopixel::CfipNeopixel(uint8_t pin, uint8_t num_of_pixels) : strip_(num_of_pixels, pin, NEO_GRB + NEO_KHZ800)
 {
 }
 
 err_code_t CfipNeopixel::setup()
 {
-    strip.begin();
-    strip.fill(0, 0, strip.numPixels());
+    strip_.begin();
+    strip_.clear();
+    strip_.show();
     return ERR_CODE_NONE;
 }
 
-void CfipNeopixel::update()
+void CfipNeopixel::update(float value)
 {
-    strip.show();
+    static const uint8_t MAX_BRIGHTNESS{255};
+    update_(value, 0, get_strip_()->numPixels(), MAX_BRIGHTNESS);
 }
 
-void CfipNeopixel::set_vario(float vario)
+void CfipNeopixel::update_(float value, uint16_t first, uint16_t cnt, uint8_t brightness)
 {
-    hue = palette(vario);
+    set_hue_(palette_(value));
 
-    uint32_t color = hue ? strip.gamma32(strip.ColorHSV(hue, 255, 255)) : 0;
+    Adafruit_NeoPixel *strip = get_strip_();
 
-    strip.fill(color, 0, strip.numPixels());
+    static const uint8_t MAX_SATURATION{255};
 
-    update();
+    uint32_t color = get_hue_() ? strip->gamma32(strip->ColorHSV(get_hue_(), MAX_SATURATION, brightness)) : 0;
+
+    strip->fill(color, first, cnt);
+    strip->show();
 }
 
-uint16_t CfipNeopixel::palette(float vario)
+uint16_t CfipNeopixel::palette_(float value)
 {
-    if (vario < min_vario)
-        return 0;
-
-    if (vario > max_vario)
-        vario = max_vario;
-
-    return (uint16_t)(vario * 65536.0f / max_vario);
+    return (uint16_t)(trim_value(value) * (float)UINT16_MAX);
 }
 
 void CfipNeopixel::print(std::stringstream &ss) const
 {
-    ss << " hue: " << std::setw(5) << std::fixed << std::setprecision(1) << hue;
+    ss << " hue: " << std::setw(5) << std::fixed << std::setprecision(1) << hue_;
+}
+
+void CfipNeopixelV1::update(float value)
+{
+    static const uint8_t MAX_BRIGHTNESS{100};
+    static const uint8_t MIN_BRIGHTNESS{30};
+    static const uint8_t WHEEL_SIZE{8};
+    static const uint16_t FIRST{1};
+
+    get_strip_()->clear();
+    uint8_t num_of_pixels = (uint8_t)(ceil((float)WHEEL_SIZE * value));
+    num_of_pixels = num_of_pixels ? num_of_pixels : FIRST;
+
+    update_(value, FIRST, num_of_pixels, map(num_of_pixels, 1, WHEEL_SIZE, MIN_BRIGHTNESS, MAX_BRIGHTNESS));
 }
 
 //------------------------------------------------------------------------------
