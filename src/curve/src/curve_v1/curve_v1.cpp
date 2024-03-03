@@ -6,20 +6,22 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include "curve_v1.h"
-#include <iomanip>
 
 using namespace vaf::fip;
+
+//------------------------------------------------------------------------------
+
+void CCurveParametricV1::update(float value)
+{
+
+    set_value_(value);
+}
 
 //------------------------------------------------------------------------------
 
 void CCurveSoundV1::update(float value)
 {
     set_value_(value);
-}
-
-void CCurveSoundV1::print(std::stringstream &ss) const
-{
-    ss << " Curve: " << std::setw(6) << std::fixed << std::setprecision(2) << get();
 }
 
 //------------------------------------------------------------------------------

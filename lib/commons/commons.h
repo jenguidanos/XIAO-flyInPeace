@@ -10,6 +10,7 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include <sstream>
+#include <iomanip>
 
 //---[ Typedefs: ]--------------------------------------------------------------
 
@@ -130,16 +131,37 @@ class CfipVisualizer : public CfipObj
 
 class CfipCurve : public CfipObj
 {
+  private:
+    float computed_value_;
+
+  protected:
+    void set_value_(float value)
+    {
+        computed_value_ = value;
+    }
+    float get_value_() const
+    {
+        return computed_value_;
+    }
+
   public:
     virtual ~CfipCurve() = default;
+    err_code_t setup() override
+    {
+        return ERR_CODE_NONE;
+    }
     const char *objType() override
     {
         return "CfipCurve";
     };
     virtual float get() const
     {
-        return 0.0f;
+        return get_value_();
     };
+    virtual void print(std::stringstream &ss) const
+    {
+        ss << " Curve: " << std::setw(6) << std::fixed << std::setprecision(2) << get();
+    }
 };
 
 class CfipButton : public CfipObj
