@@ -88,7 +88,7 @@ static void print_output(void)
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
-#define DEBUG
+//#define DEBUG
 
 float cnt = 0.0f;
 
@@ -125,10 +125,6 @@ void loop()
     visualizer->update(curve->get());
 
     print_output();
-
-#ifdef DEBUG
-    sleep(50);
-#endif
 
 }
 

@@ -30,7 +30,7 @@ err_code_t CSoundAD9833::setup()
 
 void CSoundAD9833::update(float value)
 {
-    static const float max_freq = 500.0f;
+    static const float max_freq = 600.0f;
     tone_ = (uint32_t)(value * max_freq);
     tone_ ? powerup() : powerdown();
     ad_.setFrequency(MD_AD9833::CHAN_0, (uint32_t)tone_);
