@@ -43,7 +43,7 @@ class CMovAvg : public CfipObj
 };
 
 float fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh);
-float fmapExt(float x, std::pair<float, float> a, std::pair<float, float> b);
+float fmapExt(float x, std::pair<float, float>& a, std::pair<float, float>& b);
 float trim_value(float value);
 
 } // namespace vaf::fip

@@ -55,9 +55,9 @@ float vaf::fip::fmap(float x, float fromLow, float fromHigh, float toLow, float 
     return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
 }
 
-float fmapExt(float x, std::pair<float, float> &a, std::pair<float, float> &b)
+float vaf::fip::fmapExt(float x, std::pair<float, float> &a, std::pair<float, float> &b)
 {
-    return fmap(x, a.first, b.first, a.second, b.second);
+    return vaf::fip::fmap(x, a.first, b.first, a.second, b.second);
 }
 
 float vaf::fip::trim_value(float value)
