@@ -6,6 +6,7 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include "curve_v1.h"
+#include <utils/utils.h>
 
 using namespace vaf::fip;
 
@@ -13,8 +14,22 @@ using namespace vaf::fip;
 
 void CCurveParametricV1::update(float value)
 {
+    for (unsigned int i = 0; i < points_.size(); i++)
+    {
+        if (points_[i].first < value)
+            continue;
 
-    set_value_(value);
+        if (points_[i].first == value)
+        {
+            set_value_(points_[i].second);
+        }
+        else
+        {
+            set_value_(fmapExt(value, points_[i], points_[i - 1]));
+        }
+
+        break;
+    }
 }
 
 //------------------------------------------------------------------------------
