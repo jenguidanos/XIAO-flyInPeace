@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] [1.0.0] - ????/??/??
+## [0.1.0rc0] - 2024/03/03
 
- - First official release
+ - First release
   
 ### Added
+ - Main functionality (vario/sound/visualization)
 ### Changed
 ### Fixed
