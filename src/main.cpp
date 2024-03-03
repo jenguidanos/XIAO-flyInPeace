@@ -29,8 +29,7 @@ static CfipVario *variometer{nullptr};
 static CfipSound *sound{nullptr};
 static CfipVisualizer *visualizer{nullptr};
 static CfipBarometer *barometer{nullptr};
-static CfipCurve *sound_curve{nullptr};
-static CfipCurve *visualization_curve{nullptr};
+static CfipCurve *curve{nullptr};
 static CfipButtonV1 *button0{nullptr};
 static CfipButtonV1 *button1{nullptr};
 
@@ -56,11 +55,8 @@ void setup()
     variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
     initialize_fip_object(variometer);
 
-    sound_curve = CFactoryCurve::create(CURVE_TYPE_SOUND_V1);
-    initialize_fip_object(sound_curve);
-
-    visualization_curve = CFactoryCurve::create(CURVE_TYPE_VISUALIZER_V1);
-    initialize_fip_object(visualization_curve);
+    curve = CFactoryCurve::create(CURVE_TYPE_PARAMETRIC_V1);
+    initialize_fip_object(curve);
 
     button0 = new CfipButtonV1(BUTTON_PIN0, DEFAULT_LONG_PRESS_LEN);
     initialize_fip_object(button0);
@@ -86,14 +82,13 @@ static void print_output(void)
     barometer->print(ss);
     variometer->print(ss);
     visualizer->print(ss);
-    sound_curve->print(ss);
-    visualization_curve->print(ss);
+    curve->print(ss);
     button0->print(ss);
     button1->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
 }
 
-//#define DEBUG
+#define DEBUG
 
 float cnt = 0.0f;
 
@@ -108,14 +103,14 @@ void loop()
 #ifdef DEBUG
     if (EV_SHORT_PRESS == button0->get_event())
     {
-        cnt -= 0.05f;
+        cnt -= 0.01f;
         if (cnt < 0.0f)
             cnt = 1.0f;
     }
 
     if (EV_SHORT_PRESS == button1->get_event())
     {
-        cnt += 0.05f;
+        cnt += 0.01f;
         if (cnt > 1.0f)
             cnt = 0.0f;
     }
@@ -125,13 +120,16 @@ void loop()
     vario = variometer->get_norm();
 #endif
 
-    sound_curve->update(vario);
-    sound->update(sound_curve->get());
-
-    visualization_curve->update(vario);
-    visualizer->update(visualization_curve->get());
+    curve->update(vario);
+    sound->update(curve->get());
+    visualizer->update(curve->get());
 
     print_output();
+
+#ifdef DEBUG
+    sleep(50);
+#endif
+
 }
 
 //------------------------------------------------------------------------------
