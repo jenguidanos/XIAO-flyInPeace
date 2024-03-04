@@ -20,7 +20,6 @@ typedef enum curve_type_e
     CURVE_TYPE_UNKNOWN,
     CURVE_TYPE_SOUND_V1,
     CURVE_TYPE_VISUALIZER_V1,
-    CURVE_TYPE_PARAMETRIC_V1,
 
     CURVE_TYPE_MAX_NUM
 } curve_type_t;

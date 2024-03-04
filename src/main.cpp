@@ -29,7 +29,8 @@ static CfipVario *variometer{nullptr};
 static CfipSound *sound{nullptr};
 static CfipVisualizer *visualizer{nullptr};
 static CfipBarometer *barometer{nullptr};
-static CfipCurve *curve{nullptr};
+static CfipCurve *sound_curve{nullptr};
+static CfipCurve *visualizer_curve{nullptr};
 static CfipButtonV1 *button0{nullptr};
 static CfipButtonV1 *button1{nullptr};
 
@@ -55,8 +56,11 @@ void setup()
     variometer = CFactoryVariometer::create(VARIO_TYPE_V1, *barometer);
     initialize_fip_object(variometer);
 
-    curve = CFactoryCurve::create(CURVE_TYPE_PARAMETRIC_V1);
-    initialize_fip_object(curve);
+    sound_curve = CFactoryCurve::create(CURVE_TYPE_SOUND_V1);
+    initialize_fip_object(sound_curve);
+
+    visualizer_curve = CFactoryCurve::create(CURVE_TYPE_VISUALIZER_V1);
+    initialize_fip_object(visualizer_curve);
 
     button0 = new CfipButtonV1(BUTTON_PIN0, DEFAULT_LONG_PRESS_LEN);
     initialize_fip_object(button0);
@@ -81,8 +85,9 @@ static void print_output(void)
     std::stringstream ss;
     barometer->print(ss);
     variometer->print(ss);
+    sound_curve->print(ss);
     visualizer->print(ss);
-    curve->print(ss);
+    visualizer_curve->print(ss);
     button0->print(ss);
     button1->print(ss);
     SERIAL_PRINTLN(ss.str().c_str());
@@ -120,9 +125,11 @@ void loop()
     vario = variometer->get();
 #endif
 
-    curve->update(vario);
-    sound->update(curve->get());
-    visualizer->update(curve->get());
+    sound_curve->update(vario);
+    sound->update(sound_curve->get());
+    
+    visualizer_curve->update(vario);
+    visualizer->update(visualizer_curve->get());
 
     print_output();
 

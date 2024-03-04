@@ -18,8 +18,6 @@ CfipCurve *CFactoryCurve::create(curve_type_t type)
         return new CCurveSoundV1();
     if (CURVE_TYPE_VISUALIZER_V1 == type)
         return new CCurveVisualizerV1();
-    if (CURVE_TYPE_PARAMETRIC_V1 == type)
-        return new CCurveParametricV1();
     return new CfipCurve();
 }
 

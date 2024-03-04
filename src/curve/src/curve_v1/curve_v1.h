@@ -18,24 +18,41 @@ namespace vaf::fip
 
 class CCurveParametricV1 : public CfipCurve
 {
-  private:
-    std::vector<std::pair<float, float>> points_ = {
-        {0.0f, 0.0f}, {0.01f, 0.0f}, {0.02f, 1.0f}, {0.3f, 0.0f}, {1.0f, 0.0f}};
-
+  protected:
+    std::vector<std::pair<float, float>> points_;
   public:
+    virtual ~CCurveParametricV1() = default;
     void update(float value) override;
 };
 
-class CCurveSoundV1 : public CfipCurve
+class CCurveSoundV1 : public CCurveParametricV1
 {
   public:
-    void update(float value) override;
+    virtual ~CCurveSoundV1() = default;
+    CCurveSoundV1()
+    {
+        points_.push_back({-100.0f, 0.0f});
+        points_.push_back({0.1f, 0.0f});
+        points_.push_back({0.2f, 1.0f});
+        points_.push_back({3.0f, 0.0f});
+        points_.push_back({10.0f, 0.0f});
+        points_.push_back({100.0f, 0.0f});
+    }
 };
 
-class CCurveVisualizerV1 : public CfipCurve
+class CCurveVisualizerV1 : public CCurveParametricV1
 {
   public:
-    void update(float value) override;
+    virtual ~CCurveVisualizerV1() = default;
+    CCurveVisualizerV1()
+    {
+        points_.push_back({-100.0f, 0.0f});
+        points_.push_back({0.1f, 0.0f});
+        points_.push_back({0.2f, 1.0f});
+        points_.push_back({3.0f, 0.0f});
+        points_.push_back({10.0f, 0.0f});
+        points_.push_back({100.0f, 0.0f});
+    }
 };
 
 } // namespace vaf::fip

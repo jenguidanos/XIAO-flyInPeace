@@ -34,18 +34,4 @@ void CCurveParametricV1::update(float value)
 
 //------------------------------------------------------------------------------
 
-void CCurveSoundV1::update(float value)
-{
-    set_value_(value);
-}
-
-//------------------------------------------------------------------------------
-
-void CCurveVisualizerV1::update(float value)
-{
-    set_value_(value ? (1.0f - value) : value);
-}
-
-//------------------------------------------------------------------------------
-
 // -- END OF FILE --
