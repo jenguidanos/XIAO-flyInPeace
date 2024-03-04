@@ -55,7 +55,6 @@ class CVarioV1 : public CfipVario
     err_code_t setup() override;
     void update() override;
     void set_altitude(float altitude) override;
-    float get_norm() const override;
 
     float get_pressure() const override
     {

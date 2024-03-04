@@ -117,7 +117,7 @@ void loop()
 
     vario = cnt;
 #else
-    vario = variometer->get_norm();
+    vario = variometer->get();
 #endif
 
     curve->update(vario);
