@@ -1,0 +1,92 @@
+[
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/barometer/src/barometer.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/barometer/src/barometer.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/barometer/src/barometer.cpp",
+        "output": ".pio/build/native/src/barometer/src/barometer.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/barometer/src/ms5611/ms5611_wrapper.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/barometer/src/ms5611/ms5611_wrapper.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/barometer/src/ms5611/ms5611_wrapper.cpp",
+        "output": ".pio/build/native/src/barometer/src/ms5611/ms5611_wrapper.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/buttons/button.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/buttons/button.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/buttons/button.cpp",
+        "output": ".pio/build/native/src/buttons/button.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/curve/src/curve.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/curve/src/curve.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/curve/src/curve.cpp",
+        "output": ".pio/build/native/src/curve/src/curve.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/curve/src/curve_v1/curve_v1.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/curve/src/curve_v1/curve_v1.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/curve/src/curve_v1/curve_v1.cpp",
+        "output": ".pio/build/native/src/curve/src/curve_v1/curve_v1.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/main.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/main.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/main.cpp",
+        "output": ".pio/build/native/src/main.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/persistence/persistence.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/persistence/persistence.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/persistence/persistence.cpp",
+        "output": ".pio/build/native/src/persistence/persistence.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/sound/src/ad9833/ad9833.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/sound/src/ad9833/ad9833.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/sound/src/ad9833/ad9833.cpp",
+        "output": ".pio/build/native/src/sound/src/ad9833/ad9833.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/sound/src/sound.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/sound/src/sound.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/sound/src/sound.cpp",
+        "output": ".pio/build/native/src/sound/src/sound.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/utils/utils.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/utils/utils.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/utils/utils.cpp",
+        "output": ".pio/build/native/src/utils/utils.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/variometer/src/fip_v1/vario_v1.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/variometer/src/fip_v1/vario_v1.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/variometer/src/fip_v1/vario_v1.cpp",
+        "output": ".pio/build/native/src/variometer/src/fip_v1/vario_v1.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/variometer/src/variometer.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/variometer/src/variometer.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/variometer/src/variometer.cpp",
+        "output": ".pio/build/native/src/variometer/src/variometer.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/version.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/version.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/version.cpp",
+        "output": ".pio/build/native/src/version.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/visualizer/src/fip_neopixel/fip_neopixel.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/visualizer/src/fip_neopixel/fip_neopixel.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/visualizer/src/fip_neopixel/fip_neopixel.cpp",
+        "output": ".pio/build/native/src/visualizer/src/fip_neopixel/fip_neopixel.o"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/visualizer/src/visualizer.o -c -std=c++11 -Og -g2 -ggdb2 -DPLATFORMIO=60114 -D__PLATFORMIO_BUILD_DEBUG__ -Iinclude -Isrc -Ilib/commons src/visualizer/src/visualizer.cpp",
+        "directory": "/home/vabarca/git/XIAO-flyInPeace",
+        "file": "src/visualizer/src/visualizer.cpp",
+        "output": ".pio/build/native/src/visualizer/src/visualizer.o"
+    }
+]

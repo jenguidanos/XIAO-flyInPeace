@@ -72,7 +72,7 @@ void CfipNeopixelV1::update(float value)
     uint8_t num_of_pixels = (uint8_t)(ceil((float)WHEEL_SIZE * value));
     num_of_pixels = num_of_pixels ? num_of_pixels : FIRST;
 
-    update_(value, FIRST, num_of_pixels, map(num_of_pixels, 1, WHEEL_SIZE, MIN_BRIGHTNESS, MAX_BRIGHTNESS));
+    update_(value, FIRST, num_of_pixels, map(num_of_pixels, 1, WHEEL_SIZE, MAX_BRIGHTNESS, MIN_BRIGHTNESS));
 }
 
 //------------------------------------------------------------------------------

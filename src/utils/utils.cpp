@@ -50,9 +50,11 @@ CMovAvg::~CMovAvg()
     _buffer = nullptr;
 }
 
-float vaf::fip::fmap(float x, float fromLow, float fromHigh, float toLow, float toHigh)
+float vaf::fip::fmap(float x, float Ax, float Bx, float Ay, float By)
 {
-    return (x - fromLow) * (toHigh - toLow) / (fromHigh - fromLow) + toLow;
+    std::pair<float, float> vo = {Bx - Ax, By - Ay};
+    float m {vo.first / vo.second};
+    return  (x * m )- (Bx * m) + By;
 }
 
 float vaf::fip::fmapExt(float x, std::pair<float, float> &a, std::pair<float, float> &b)

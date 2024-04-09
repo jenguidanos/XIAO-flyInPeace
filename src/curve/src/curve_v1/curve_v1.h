@@ -33,9 +33,8 @@ class CCurveSoundV1 : public CCurveParametricV1
     {
         points_.push_back({-100.0f, 0.0f});
         points_.push_back({0.1f, 0.0f});
-        points_.push_back({0.2f, 1.0f});
-        points_.push_back({3.0f, 0.0f});
-        points_.push_back({10.0f, 0.0f});
+        points_.push_back({3.0f, 1.0f});
+        points_.push_back({3.1f, 0.0f});
         points_.push_back({100.0f, 0.0f});
     }
 };
@@ -48,9 +47,8 @@ class CCurveVisualizerV1 : public CCurveParametricV1
     {
         points_.push_back({-100.0f, 0.0f});
         points_.push_back({0.1f, 0.0f});
-        points_.push_back({0.2f, 1.0f});
-        points_.push_back({3.0f, 0.0f});
-        points_.push_back({10.0f, 0.0f});
+        points_.push_back({3.0f, 1.0f});
+        points_.push_back({3.1f, 0.0f});
         points_.push_back({100.0f, 0.0f});
     }
 };
