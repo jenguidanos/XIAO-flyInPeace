@@ -6,7 +6,7 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include "curve_v1/curve_v1.h"
-#include <curve/curve.h>
+#include "curve.h"
 
 using namespace vaf::fip;
 

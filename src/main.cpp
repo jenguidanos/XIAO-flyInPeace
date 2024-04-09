@@ -15,7 +15,7 @@
 #include <barometer/barometer.h>
 #include <buttons/button.h>
 #include <commons.h>
-#include <curve/curve.h>
+#include "curve.h"
 #include <iomanip>
 #include <sound/sound.h>
 #include <variometer/variometer.h>
