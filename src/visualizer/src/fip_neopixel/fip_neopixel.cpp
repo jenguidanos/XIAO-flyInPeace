@@ -13,7 +13,7 @@
 
 #include "fip_neopixel.h"
 #include <iomanip>
-#include <utils/utils.h>
+#include "utils.h"
 
 using namespace vaf::fip;
 

@@ -10,8 +10,9 @@
 
 #include <SimpleKalmanFilter.h>
 #include <persistence/persistence.h>
-#include <utils/utils.h>
+#include "utils.h"
 #include <variometer/variometer.h>
+
 
 //---[ Define: ]----------------------------------------------------------------
 

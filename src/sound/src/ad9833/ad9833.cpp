@@ -6,8 +6,9 @@
 //---[ Includes: ]--------------------------------------------------------------
 
 #include "ad9833.h"
+
 #include <SPI.h>
-#include <utils/utils.h>
+#include "utils.h"
 
 using namespace vaf::fip;
 
